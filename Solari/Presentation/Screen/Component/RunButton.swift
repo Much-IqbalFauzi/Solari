@@ -10,13 +10,14 @@ import SwiftUI
 struct RunButton: View {
     var body: some View {
         VStack{
-            Spacer()
             Button {
             } label: {
                 Label("Select Routes", systemImage: "figure.run")
+                    .font(.system(size: 24))
+                    .fontWeight(.semibold)
             }
             .padding()
-            .frame(maxWidth: 300, maxHeight: 63)
+            .frame(maxWidth: 320, maxHeight: 65)
             .foregroundColor(.black)
             .background(Color(hex: "#D5FF5F"))
             .cornerRadius(15)
