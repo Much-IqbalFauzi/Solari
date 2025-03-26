@@ -11,9 +11,14 @@ struct HomeScreen: View {
     
     
     var body: some View {
-        HStack {
-            ForEach(CardSummary.summaries, id: \.summaryType) { summary in
-                    summary
+        VStack{
+            
+            IllustrationHome()
+            
+            HStack {
+                ForEach(CardSummary.summaries, id: \.summaryType) { summary in
+                        summary
+                }
             }
         }
     }
