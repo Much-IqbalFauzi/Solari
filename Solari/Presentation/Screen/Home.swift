@@ -20,9 +20,16 @@ struct HomeScreen: View {
                 
             }
             .frame(maxWidth: .infinity, maxHeight: 500, alignment: .topLeading)
-            HStack {
-                ForEach(CardSummary.summaries, id: \.summaryType) { summary in
-                        summary
+            
+            VStack(alignment: .leading) {
+                Text("Sobari you're doing great! Here's your summary!")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                HStack {
+                    ForEach(CardSummary.summaries, id: \.summaryType) {
+                        summary in summary
+                    }
                 }
             }
             
