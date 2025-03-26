@@ -8,8 +8,27 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    
+    
     var body: some View {
-        Text("Home Screen!")
+        VStack{
+            ZStack (alignment: .topLeading) {
+                IllustrationHome()
+                    .padding(.top, 100)
+                
+                WelcomingTitle()
+                
+            }
+            .frame(maxWidth: .infinity, maxHeight: 500, alignment: .topLeading)
+            HStack {
+                ForEach(CardSummary.summaries, id: \.summaryType) { summary in
+                        summary
+                }
+            }
+            
+            RunButton()
+            
+        }
     }
 }
 

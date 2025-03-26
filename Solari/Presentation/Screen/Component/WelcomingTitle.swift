@@ -30,9 +30,7 @@ struct WelcomingTitle: View {
                 .font(.largeTitle)
                 .fontWeight(.semibold)
                 .padding()
-            Spacer()
         }
-        .padding(.top, 50 )
         .offset(x:-5,y:0)
         
         
