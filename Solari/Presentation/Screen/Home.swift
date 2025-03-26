@@ -25,6 +25,9 @@ struct HomeScreen: View {
                         summary
                 }
             }
+            
+            RunButton()
+            
         }
     }
 }
