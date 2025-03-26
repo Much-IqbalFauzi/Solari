@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    
+    
     var body: some View {
-        Text("Home Screen!")
+        HStack {
+            ForEach(CardSummary.summaries, id: \.summaryType) { summary in
+                    summary
+            }
+        }
     }
 }
 
