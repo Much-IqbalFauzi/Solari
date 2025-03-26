@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CardSummary: View {
-    @State var summaryType: String
+    let summaryType: String
     @State var summaryValue: String
     
     var body: some View {
