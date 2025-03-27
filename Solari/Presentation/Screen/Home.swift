@@ -35,7 +35,6 @@ struct HomeScreen: View {
             
             RunButton()
                 .padding(.top, 5)
-            
         }
     }
 }
