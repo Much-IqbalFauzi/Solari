@@ -18,7 +18,7 @@ struct RunButton: View {
             .padding()
             .frame(maxWidth: 320, maxHeight: 65)
             .foregroundColor(.black)
-//            .background(Color(hex: "#D5FF5F"))
+           .background(Color(hex: "#D5FF5F"))
             .cornerRadius(15)
             .background(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
