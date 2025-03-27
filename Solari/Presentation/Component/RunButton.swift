@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct RunButton: View {
+    var buttonText: String
+    
     var body: some View {
         VStack {
             Button {
             } label: {
-                Label("Select Routes", systemImage: "figure.run")
+                Label(buttonText, systemImage: "figure.run")
                     .font(.system(size: 24))
                     .fontWeight(.semibold)
 
@@ -46,6 +48,5 @@ struct RunButton: View {
 }
 
 #Preview {
-    RunButton()
-
+    RunButton(buttonText: "Select Routes")
 }

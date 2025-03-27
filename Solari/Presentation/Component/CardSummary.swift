@@ -14,7 +14,7 @@ struct CardSummary: View {
     var body: some View {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
-                    .fill(.white)
+                    .fill(Color("summaryColor"))
                     .frame(width: 100, height: 140)
                     .shadow(radius: 2, x: 0, y: 2)
                 
