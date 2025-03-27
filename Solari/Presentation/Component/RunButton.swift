@@ -11,15 +11,10 @@ struct RunButton: View {
     var buttonText: String
     
     var body: some View {
-        VStack {
-            Button {
-            } label: {
-                Label(buttonText, systemImage: "figure.run")
-                    .font(.system(size: 24))
-                    .fontWeight(.semibold)
-
-            }
-
+        VStack{
+            Label(buttonText, systemImage: "figure.run")
+                .font(.system(size: 24))
+                .fontWeight(.semibold)
             .padding()
             .frame(maxWidth: 320, maxHeight: 65)
             .foregroundColor(.black)

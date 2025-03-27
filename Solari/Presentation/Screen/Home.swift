@@ -11,30 +11,35 @@ struct HomeScreen: View {
     
     
     var body: some View {
-        VStack{
-            ZStack (alignment: .topLeading) {
-                IllustrationHome()
-                    .padding(.top, 100)
+        NavigationStack {
+            VStack{
+                ZStack (alignment: .topLeading) {
+                    IllustrationHome()
+                        .padding(.top, 100)
+                    
+                    WelcomingTitle()
+                    
+                }
+                .frame(maxWidth: .infinity, maxHeight: 500, alignment: .topLeading)
                 
-                WelcomingTitle()
-                
-            }
-            .frame(maxWidth: .infinity, maxHeight: 500, alignment: .topLeading)
-            
-            VStack(alignment: .leading) {
-                Text("Sobari you're doing great! Here's your summary!")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                
-                HStack {
-                    ForEach(CardSummary.summaries, id: \.summaryType) {
-                        summary in summary
+                VStack(alignment: .leading) {
+                    Text("Sobari you're doing great! Here's your summary!")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    
+                    HStack {
+                        ForEach(CardSummary.summaries, id: \.summaryType) {
+                            summary in summary
+                        }
                     }
+                    
+
+                    NavigationLink(destination: RouteStartPointScreen()) {
+                        RunButton(buttonText: "Select Routes")
+                    }
+                    .padding(.top, 5)
                 }
             }
-            
-            RunButton(buttonText: "Select Routes")
-                .padding(.top, 5)
         }
     }
 }
