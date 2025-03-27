@@ -33,9 +33,8 @@ struct HomeScreen: View {
                 }
             }
             
-            RunButton()
+            RunButton(buttonText: "Select Routes")
                 .padding(.top, 5)
-            
         }
     }
 }
