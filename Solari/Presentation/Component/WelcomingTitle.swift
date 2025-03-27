@@ -31,7 +31,7 @@ struct WelcomingTitle: View {
                 .fontWeight(.semibold)
                 .padding()
         }
-        .offset(x:-5,y:0)
+
         
         
     }

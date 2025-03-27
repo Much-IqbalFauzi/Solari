@@ -13,7 +13,7 @@ struct HomeScreen: View {
     var body: some View {
         NavigationStack {
             VStack{
-                ZStack (alignment: .topLeading) {
+                ZStack (alignment: .top) {
                     IllustrationHome()
                         .padding(.top, 100)
                     
@@ -22,10 +22,9 @@ struct HomeScreen: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: 500, alignment: .topLeading)
                 
-                VStack(alignment: .leading) {
-                    Text("Sobari you're doing great! Here's your summary!")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                VStack(alignment: .center) {
+                    HomeSummaryText()
+                        
                     
                     HStack {
                         ForEach(CardSummary.summaries, id: \.summaryType) {
