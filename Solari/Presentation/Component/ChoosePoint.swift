@@ -21,19 +21,19 @@ struct ChoosePoint: View {
                 ForEach(startPoints.indices, id: \ .self) { index in
                     ZStack {
                         Rectangle()
-                            .foregroundColor(.white)
+                            .foregroundColor(.lightGray)
                             .frame(width: 320, height: 90)
                         
                         Text(startPoints[index].name)
                             .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                     }
                     .frame(width: 320, height: 80)
                 }
             }
             .tabViewStyle(.page)
-            .frame(width: 320, height: 90)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .frame(width: 320, height: 70)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 2, x: 0, y: 2)
         }
     }
