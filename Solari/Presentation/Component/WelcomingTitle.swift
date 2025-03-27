@@ -15,9 +15,9 @@ struct WelcomingTitle: View {
             switch currentHour {
             case 0..<12:
                 return "Good Morning Sobari!"
-            case 12..<17:
+            case 12..<16:
                 return "Good Afternoon Sobari!"
-            case 17..<21:
+            case 16..<20:
                 return "Good Evening Sobari!"
             default:
                 return "Good Night Sobari!"

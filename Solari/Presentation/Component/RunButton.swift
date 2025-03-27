@@ -18,8 +18,25 @@ struct RunButton: View {
             .padding()
             .frame(maxWidth: 320, maxHeight: 65)
             .foregroundColor(.black)
-            .background(Color(hex: "#D5FF5F"))
+//            .background(Color(hex: "#D5FF5F"))
             .cornerRadius(15)
+            .background(
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .fill(
+                        .shadow(
+                            .inner(
+                                color: .lightGray.opacity(0.5),
+
+                                radius: 0.5,
+                                x: -1,
+                                y: 1
+                            )
+                        )
+                    )
+                    .foregroundStyle(Color(hex: "#D5FF5F"))
+
+            )
+
         }
         .shadow(color: .gray.opacity(0.5), radius: 3, y: 2)
     }
@@ -27,5 +44,4 @@ struct RunButton: View {
 
 #Preview {
     RunButton(buttonText: "Select Routes")
-    
 }
