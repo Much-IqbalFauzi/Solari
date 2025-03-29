@@ -27,7 +27,7 @@ struct WelcomingTitle: View {
     var body: some View {
         VStack {
             Text(getGreetingMessage())
-                .font(.largeTitle)
+                .font(.system(size: 30))
                 .fontWeight(.semibold)
                 .padding()
         }
