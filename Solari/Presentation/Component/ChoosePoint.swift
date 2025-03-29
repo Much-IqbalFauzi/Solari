@@ -18,22 +18,23 @@ struct ChoosePoint: View {
     var body: some View {
         VStack {
             TabView(selection: $selectedIndex) {
-                ForEach(startPoints.indices, id: \ .self) { index in
+                ForEach(startPoints.indices, id: \.self) { index in
                     ZStack {
                         Rectangle()
-                            .foregroundColor(.lightGray)
-                            .frame(width: 320, height: 90)
+                            .fill(Color(.systemGray6))
+                            .frame(width: 320, height: 90) // Inside rectangle size
                         
                         Text(startPoints[index].name)
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.white)
+                            .font(.system(size: 17, weight: .semibold))
+                            .foregroundColor(.primary)
+                            .padding()
                     }
-                    .frame(width: 320, height: 80)
+                    .tag(index)
                 }
             }
-            .tabViewStyle(.page)
-            .frame(width: 320, height: 70)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .tabViewStyle(.page(indexDisplayMode: .automatic))
+            .frame(width: 320, height: 90) // Clip frame size: same height and width with inside rect
+            .clipShape(RoundedRectangle(cornerRadius: 15) ) // Clipping with roundedRectangle shape
             .shadow(radius: 2, x: 0, y: 2)
         }
     }
