@@ -15,20 +15,22 @@ struct HomeScreen: View {
             VStack{
                 ZStack (alignment: .top) {
                     IllustrationHome()
-                        .padding(.top, 100)
+                        .padding(.top, 90)
                     
                     WelcomingTitle()
                     
                 }
-                .frame(maxWidth: .infinity, maxHeight: 500, alignment: .topLeading)
+                .frame(maxWidth: .infinity, maxHeight: 500, alignment: .center)
                 
                 VStack(alignment: .center) {
                     HomeSummaryText()
+                        .padding(.top, -50)
                         
                     
                     HStack {
                         ForEach(CardSummary.summaries, id: \.summaryType) {
                             summary in summary
+                                .padding(.top, -25)
                         }
                     }
                     

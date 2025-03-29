@@ -12,6 +12,7 @@ struct IllustrationHome: View {
         Image("homeIllustration")
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .frame(height: 350)
     }
 }
 
