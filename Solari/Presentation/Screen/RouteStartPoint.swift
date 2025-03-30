@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RouteStartPointScreen: View {
+    @State private var showModalAlert = false
+    @StateObject private var locationManager = MyLocationManager()
     var body: some View {
         VStack(spacing: 10) {
             Text("Short Run")
@@ -37,8 +39,9 @@ struct RouteStartPointScreen: View {
             }
             VStack(spacing: 10) {
                 ChoosePoint()
-               
-                RunButton(buttonText: "Run Now")
+                NavigationLink(destination: RunProgressScreen()) {
+                    RunButton(buttonText: "Run Now")
+                }
            }
         }
     }
