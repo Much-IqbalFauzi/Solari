@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    
+    @StateObject private var locationManager = MyLocationManager()
     var body: some View {
         NavigationStack {
             VStack{
@@ -17,7 +17,7 @@ struct HomeScreen: View {
                     IllustrationHome()
                         .padding(.top, 60)
                     
-                    WelcomingTitle()
+                    WelcomingTitle(greetingIsNearLocation: locationManager.distanceLocation().1)
                     
                 }
                 .frame(maxWidth: .infinity, maxHeight: 500, alignment: .center)
@@ -33,7 +33,6 @@ struct HomeScreen: View {
                                 .padding(.top, -50)
                         }
                     }
-                    
 
                     NavigationLink(destination: RouteStartPointScreen()) {
                         RunButton(buttonText: "Select Routes")

@@ -10,22 +10,22 @@ import SwiftUI
 struct SummaryScreen: View {
     var body: some View {
         VStack(spacing: 10) {
-            Rectangle()
-                .fill(Color.gray)
-                .frame(width: 380, height: 80)
+            Text("Congratulations!")
+                .font(.largeTitle)
+                .bold()
             
-            HStack(spacing: 10) {
+            HStack(alignment: .top) {
                 Rectangle()
                     .fill(Color.red)
                     .frame(width: 185, height: 410)
-                VStack(spacing: 10) {
-                    Rectangle()
-                        .fill(Color.black)
-                        .frame(width: 185, height: 200)
+                
+                Spacer()
+
+                
+                VStack() {
+                    RunResultCard(runResultType: "KM", runResultValue: "2.2")
                     
-                    Rectangle()
-                        .fill(Color.purple)
-                        .frame(width: 185, height: 200)
+                    RunResultCard(runResultType: "Minutes", runResultValue: "30")
                 }
             }
             VStack(spacing: 10) {
@@ -47,6 +47,7 @@ struct SummaryScreen: View {
                 }
                 }
         }
+        .padding()
     }
 }
 #Preview {

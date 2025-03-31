@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct WelcomingTitle: View {
-    
+    var greetingIsNearLocation: Bool = true
     func getGreetingMessage() -> String {
-            let currentHour = Calendar.current.component(.hour, from: Date())
+        let currentHour = Calendar.current.component(.hour, from: Date())
+        
+        if (!greetingIsNearLocation) {
+            return "Sobari! far from GOP"
+        }
             
             switch currentHour {
             case 0..<12:
@@ -23,6 +27,7 @@ struct WelcomingTitle: View {
                 return "Good Night Sobari!"
             }
         }
+    }
     
     var body: some View {
         VStack {
@@ -31,9 +36,6 @@ struct WelcomingTitle: View {
                 .fontWeight(.semibold)
                 .padding()
         }
-
-        
-        
     }
 }
 

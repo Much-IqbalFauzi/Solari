@@ -9,16 +9,18 @@ import SwiftUI
 
 struct RunButton: View {
     var buttonText: String
+    var trailingIcon: String = "figure.run"
+    var btnColor: Color = .greenYellow
     
     var body: some View {
         VStack{
-            Label(buttonText, systemImage: "figure.run")
+            Label(buttonText, systemImage: trailingIcon)
                 .font(.system(size: 24))
                 .fontWeight(.semibold)
             .padding()
             .frame(maxWidth: 320, maxHeight: 65)
             .foregroundColor(.black)
-           .background(Color(hex: "#D5FF5F"))
+            .background(btnColor)
             .cornerRadius(15)
             .background(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
@@ -33,8 +35,7 @@ struct RunButton: View {
                             )
                         )
                     )
-                    .foregroundStyle(Color(hex: "#D5FF5F"))
-
+                    .foregroundStyle(btnColor)
             )
 
         }
