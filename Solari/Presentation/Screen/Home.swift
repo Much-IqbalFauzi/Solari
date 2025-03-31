@@ -15,7 +15,7 @@ struct HomeScreen: View {
             VStack{
                 ZStack (alignment: .top) {
                     IllustrationHome()
-                        .padding(.top, 90)
+                        .padding(.top, 60)
                     
                     WelcomingTitle(greetingIsNearLocation: locationManager.distanceLocation().1)
                     
@@ -24,22 +24,23 @@ struct HomeScreen: View {
                 
                 VStack(alignment: .center) {
                     HomeSummaryText()
-                        .padding(.top, -50)
+                        .padding(.top, -90)
                         
                     
                     HStack {
                         ForEach(CardSummary.summaries, id: \.summaryType) {
                             summary in summary
-                                .padding(.top, -25)
+                                .padding(.top, -50)
                         }
                     }
 
                     NavigationLink(destination: RouteStartPointScreen()) {
                         RunButton(buttonText: "Select Routes")
                     }
-                    .padding(.top, 5)
+                    .padding(.top, 10)
                 }
             }
+            .padding(.top, -50)
         }
     }
 }
