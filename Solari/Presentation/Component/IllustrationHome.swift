@@ -9,18 +9,24 @@
     import SwiftUI
 
 struct IllustrationHome: View {
+    var greetingIsNearLocation: Bool = true
     func getImageName() -> String {
         let currentHour = Calendar.current.component(.hour, from: Date())
         
+        var imageName: String = "farGOP"
+        if greetingIsNearLocation {
+            imageName = "nearGOP"
+        }
+        
         switch currentHour {
         case 0..<12:
-            return "homeIllustration"
+            return imageName + "-morning"
         case 12..<15:
-            return "homeIllustration 1"
+            return imageName + "-afternoon"
         case 15..<18:
-            return "homeIllustration 2"
+            return imageName + "-evening"
         default:
-            return "homeIllustration 3"
+            return imageName + "-night"
         }
     }
     

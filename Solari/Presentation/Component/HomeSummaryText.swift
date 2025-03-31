@@ -15,7 +15,7 @@ struct HomeSummaryText: View {
     }
 
     var body: some View {
-        Text("Solari Journey Based On \(getCurrentDate())")
+        Text("Solari journey based on \(getCurrentDate())")
             .font(.system(size: 16))
             .foregroundColor(.secondary)
             .padding(3)

@@ -8,14 +8,9 @@
 import SwiftUI
 
 struct WelcomingTitle: View {
-    var greetingIsNearLocation: Bool = true
     func getGreetingMessage() -> String {
         let currentHour = Calendar.current.component(.hour, from: Date())
-        
-        if (!greetingIsNearLocation) {
-            return "Sobari! far from GOP"
-        }
-            
+    
         switch currentHour {
         case 0..<12:
             return "Good Morning Sobari!"

@@ -14,12 +14,17 @@ struct HomeScreen: View {
         NavigationStack {
             VStack{
                 ZStack (alignment: .top) {
-                    IllustrationHome()
-                        .padding(.top, 60)
-                    
-                    WelcomingTitle(greetingIsNearLocation: locationManager.distanceLocation().1)
-                    
+                    IllustrationHome(greetingIsNearLocation: locationManager.distanceLocation().1)
+                        .padding(.top, 65)
+                    VStack {
+                        
+                        WelcomingTitle()
+                        
+                        LocationText(greetingIsNearLocation: locationManager.distanceLocation().1)
+                            .padding(.top, -23)
+                    }
                 }
+                
                 .frame(maxWidth: .infinity, maxHeight: 500, alignment: .center)
                 
                 VStack(alignment: .center) {
@@ -37,7 +42,7 @@ struct HomeScreen: View {
                     NavigationLink(destination: RouteStartPointScreen()) {
                         RunButton(buttonText: "Select Routes")
                     }
-                    .padding(.top, 10)
+                    .padding(.top, 6)
                 }
             }
             .padding(.top, -50)
