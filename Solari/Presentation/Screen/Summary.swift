@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SummaryScreen: View {
+    @EnvironmentObject var navigationManager: NavigationManager
     var body: some View {
         VStack(spacing: 10) {
             Text("Congratulations!")
