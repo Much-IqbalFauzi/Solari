@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var navigationManager = NavigationManager()
     var body: some View {
-        HomeScreen()
+        NavigationStack(path: $navigationManager.path) {
+            HomeScreen()
+                .navigationDestination(for: RouteNav.self) { route in
+                    switch route {
+                    case .home:
+                        HomeScreen()
+                    case .startPoint:
+                        RouteStartPointScreen()
+                    case .startProgress:
+                        RunProgressScreen()
+                    case .summary:
+                        SummaryScreen()
+                    }
+                }
+        }
+        .environmentObject(navigationManager)
     }
 }
 

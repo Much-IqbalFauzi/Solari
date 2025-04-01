@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RunProgressScreen: View {
+    
+    @EnvironmentObject var navigationManager: NavigationManager
     var body: some View {
         VStack(spacing: 10) {
             Rectangle()
