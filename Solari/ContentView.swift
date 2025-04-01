@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var navigationManager = NavigationManager()
+//    @Environment(\.modelContext) private var modelContext
     var body: some View {
         NavigationStack(path: $navigationManager.path) {
             HomeScreen()
