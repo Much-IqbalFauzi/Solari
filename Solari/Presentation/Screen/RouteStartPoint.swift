@@ -44,7 +44,7 @@ struct RouteStartPointScreen: View {
                 RunButton(buttonText: "Run Now", action: {
                     navigationManager.navigate(to: .startProgress)
                 })
-           }
+            }
         }
     }
 }
