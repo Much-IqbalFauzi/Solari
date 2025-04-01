@@ -50,5 +50,4 @@ struct RouteStartPointScreen: View {
 }
 #Preview {
     RouteStartPointScreen()
-        .environmentObject(NavigationManager())
 }

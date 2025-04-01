@@ -51,5 +51,4 @@ struct HomeScreen: View {
 
 #Preview {
     HomeScreen()
-        .environmentObject(NavigationManager()) // Inject the manager
 }
