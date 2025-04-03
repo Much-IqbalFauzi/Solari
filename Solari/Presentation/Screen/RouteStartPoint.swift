@@ -11,6 +11,8 @@ struct RouteStartPointScreen: View {
     @State private var showModalAlert = false
     @StateObject private var locationManager = MyLocationManager()
     @EnvironmentObject var navigationManager: NavigationManager
+    @State private var runDataManager: RunDataManager? = nil
+    
     var body: some View {
         VStack(spacing: 10) {
             Text("Short Run")
@@ -42,6 +44,11 @@ struct RouteStartPointScreen: View {
                 ChoosePoint()
                 
                 RunButton(buttonText: "Run Now", action: {
+                    let manager = RunDataManager(locationManager: locationManager)
+                    manager.startTrackingLocation()
+                    manager.startRun()
+                    runDataManager = manager
+                    
                     navigationManager.navigate(to: .startProgress)
                 })
             }
