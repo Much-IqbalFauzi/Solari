@@ -15,13 +15,17 @@ struct HomeScreen: View {
     var body: some View {
         VStack{
             ZStack (alignment: .top) {
-                IllustrationHome(greetingIsNearLocation: locationManager.distanceLocation().1)
+                IllustrationHome(
+                    greetingIsNearLocation: locationManager.isNearLocation
+                )
                     .padding(.top, 65)
                 VStack {
                     
                     WelcomingTitle()
                     
-                    LocationText(greetingIsNearLocation: locationManager.distanceLocation().1)
+                    LocationText(
+                        greetingIsNearLocation: locationManager.isNearLocation
+                    )
                         .padding(.top, -23)
                 }
             }
