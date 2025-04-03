@@ -12,6 +12,7 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var locationStatus: CLAuthorizationStatus?
     @Published var currentLocation: CLLocation?
     @Published var isNearLocation: Bool = false
+    @Published var distance: Double?
     
     override init() {
         super.init()
@@ -22,14 +23,7 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private func requestLocationPermission() {
         if CLLocationManager.locationServicesEnabled() {
-            switch locationManager.authorizationStatus {
-            case .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
-            case .authorizedWhenInUse, .authorizedAlways:
-                locationManager.startUpdatingLocation()
-            default:
-                print("Location access denied")
-            }
+            locationManager.requestWhenInUseAuthorization()
         } else {
             print("Location services are disabled")
         }
@@ -43,7 +37,7 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         case .denied, .restricted:
             print("Location access denied")
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            break
         @unknown default:
             print("Unknown authorization status")
         }
@@ -52,6 +46,7 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latestLocation = locations.last else { return }
         
+        // Ensure run on main thread
         DispatchQueue.main.async { [weak self] in
             self?.currentLocation = latestLocation
             self?.updateDistance()
@@ -64,14 +59,22 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             isNearLocation = false
             return
         }
-
-        let targetLocation = CLLocation(latitude: -7.410047832999287, longitude: 109.43366802976672)
-        let distance = currentLocation.distance(from: targetLocation)
         
-        isNearLocation = distance <= 3000
+        // TODO: OUR SPECIFIC RUNNING LOCATION
+        // TODO: You can test on ur own location
+        let latitude: Double = -7.410047832999287
+        let longitude: Double =  109.43366802976672
+        
+        // TODO: RADIUS ON OUR RUNNING LOCATION
+        let radius: Double = 3000
+        
+        let pointCoordinate = CLLocation(latitude: latitude, longitude: longitude)
+        distance = currentLocation.distance(from: pointCoordinate)
+        
+        isNearLocation = distance ?? 0 <= radius
         
         print("Current Location: \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
-        print("Distance to Target: \(distance) meters")
+        print("Distance to Target: \(distance ?? 0) meters")
         print("Is Near: \(isNearLocation)")
     }
 }
