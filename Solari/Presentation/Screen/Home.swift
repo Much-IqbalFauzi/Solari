@@ -35,7 +35,7 @@ struct HomeScreen: View {
                     HStack {
                         ForEach(CardSummary.summaries, id: \.summaryType) {
                             summary in summary
-                                .padding(.top, -50)
+                                .padding(.top, -55)
                         }
                     }
 

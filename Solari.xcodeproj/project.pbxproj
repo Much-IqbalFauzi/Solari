@@ -107,6 +107,9 @@
 			);
 			mainGroup = 596469222D92344A004B3A34;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				702339372D9E74600098B54B /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5964692C2D92344A004B3A34 /* Products */;
 			projectDirPath = "";
@@ -345,6 +348,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		702339372D9E74600098B54B /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 596469232D92344A004B3A34 /* Project object */;
 }
