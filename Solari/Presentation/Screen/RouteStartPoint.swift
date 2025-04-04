@@ -67,7 +67,6 @@ struct RouteStartPointScreen: View {
             }
         }
     }
-}
 
 #Preview {
     let mockLocationManager = MyLocationManager()
