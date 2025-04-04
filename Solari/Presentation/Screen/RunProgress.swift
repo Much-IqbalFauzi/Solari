@@ -8,41 +8,39 @@
 import SwiftUI
 
 struct RunProgressScreen: View {
-    
     @EnvironmentObject var navigationManager: NavigationManager
+    @StateObject private var locationManager = MyLocationManager()
+    @ObservedObject var runDataManager: RunDataManager
+    @State private var showingStopAlert = false
+
     var body: some View {
         VStack(spacing: 10) {
-            Rectangle()
-                .fill(Color.gray)
-                .frame(width: 380, height: 80)
+            Text("Your Run Progress")
+                        .font(.title)
+                        .bold()
             
             Rectangle()
-                .fill(Color.gray)
-                .frame(width: 380, height: 370)
+                        .fill(Color.gray.opacity(0.3))
+                        .frame(width: 380, height: 500)
+                        .overlay(Text("Map goes here"))
             
-            Rectangle()
-                .fill(Color.gray)
-                .frame(width: 380, height: 80)
-            
-            HStack(spacing: 10) {
-                       Rectangle()
-                           .fill(Color.red)
-                           .frame(width: 185, height: 100)
-                       
-                       Rectangle()
-                           .fill(Color.blue)
-                           .frame(width: 185, height: 100)
-                   }
-            
-            HStack(spacing: 10) {
-                        Rectangle()
-                            .fill(Color.blue)
-                            .frame(width: 185, height: 100)
-                           }
-                }
-            }
+            Spacer()
+            RunMetricsRow(
+                duration: runDataManager.formattedElapsedTime,
+                distance: String(format: "%.2f km", runDataManager.distanceTraveled / 1000),
+                pace: runDataManager.formattedPace
+            )
+            RunControlButtons(runDataManager: runDataManager, showingStopAlert: $showingStopAlert)
         }
+        .onReceive(locationManager.$currentLocation.compactMap { $0 }) { location in
+            runDataManager.updateLocation(location)
+        }
+        .onAppear {
+            runDataManager.startRun()
+        }
+    }
+}
 
 #Preview {
-    RunProgressScreen()
+    RunProgressScreen(runDataManager: .init(locationManager: .init()))
 }
