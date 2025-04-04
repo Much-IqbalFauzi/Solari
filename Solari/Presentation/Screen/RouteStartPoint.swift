@@ -11,7 +11,7 @@ import MapKit
 struct RouteStartPointScreen: View {
     @State private var showModalAlert = false
     @StateObject private var locationManager = MyLocationManager()
-    
+    @EnvironmentObject var navigationManager: NavigationManager
     var body: some View {
         VStack(spacing: 10) {
             
@@ -31,10 +31,12 @@ struct RouteStartPointScreen: View {
             
             VStack(spacing: 10) {
                 ChoosePoint()
-                NavigationLink(destination: RunProgressScreen()) {
-                    RunButton(buttonText: "Run Now")
-                }
-            }
+//                NavigationLink(destination: RunProgressScreen()) {
+//                    RunButton(buttonText: "Run Now")
+//                }
+                RunButton(buttonText: "Run Now", action: {
+                    navigationManager.navigate(to: .startProgress)
+                })            }
         }
     }
     
