@@ -10,11 +10,17 @@ import MapKit
 
 struct RouteStartPointScreen: View {
     @State private var showModalAlert = false
-    @StateObject private var locationManager = MyLocationManager()
-    @EnvironmentObject var navigationManager: NavigationManager
-    @State private var runDataManager: RunDataManager? = nil
+    @ObservedObject private var locationManager: MyLocationManager
+    @StateObject var selectRouteViewModel: SelectRouteViewModel
     
-    @StateObject var selectRouteViewModel = SelectRouteViewModel(locationManager: MyLocationManager())
+    
+    init(locationManager: MyLocationManager, navigationManager: NavigationManager) {
+        self.locationManager = locationManager
+        _selectRouteViewModel = StateObject(wrappedValue: SelectRouteViewModel(
+            locationManager: locationManager,
+            navigationManager: navigationManager
+        ))
+    }
     
     var body: some View {
             ScrollView(.vertical, showsIndicators: false) {
@@ -61,7 +67,14 @@ struct RouteStartPointScreen: View {
             }
         }
     }
+}
 
 #Preview {
-    RouteStartPointScreen()
+    let mockLocationManager = MyLocationManager()
+    let mockNavigationManager = NavigationManager()
+    
+    return RouteStartPointScreen(
+        locationManager: mockLocationManager,
+        navigationManager: mockNavigationManager
+    )
 }

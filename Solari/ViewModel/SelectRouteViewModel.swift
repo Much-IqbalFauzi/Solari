@@ -5,21 +5,19 @@
 //  Created by Muchamad Iqbal Fauzi on 03/04/25.
 //
 
-import SwiftUI
-
+import Foundation
 
 class SelectRouteViewModel: ObservableObject {
-    
-    @State private var runDataManager: RunDataManager? = nil
-    @EnvironmentObject var navigationManager: NavigationManager
-    @State private var locationManager: MyLocationManager //= MyLocationManager()
-    
-    init(locationManager: MyLocationManager) {
-        runDataManager = RunDataManager(locationManager: locationManager)
+    private var navigationManager: NavigationManager
+    private var locationManager: MyLocationManager
+    private var runDataManager: RunDataManager?
+
+    init(locationManager: MyLocationManager, navigationManager: NavigationManager) {
         self.locationManager = locationManager
+        self.navigationManager = navigationManager
+        self.runDataManager = RunDataManager(locationManager: locationManager)
     }
-    
-    
+
     func navigateRunProgressHandler() {
         let manager = RunDataManager(locationManager: locationManager)
         manager.startTrackingLocation()
@@ -27,6 +25,4 @@ class SelectRouteViewModel: ObservableObject {
         runDataManager = manager
         navigationManager.navigate(to: .startProgress)
     }
-    
-    
 }

@@ -56,7 +56,7 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         let longitude: Double =   110.48115
         
         // TODO: RADIUS ON OUR RUNNING LOCATION
-        let radius: Double = 7
+        let radius: Double = 200000
         
         let pointCoordinate = CLLocation(latitude: latitude, longitude: longitude)
         distance = currentLocation.distance(from: pointCoordinate)
