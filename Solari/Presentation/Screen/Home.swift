@@ -22,6 +22,7 @@ struct HomeScreen: View {
                     .padding(.top, 65)
                 VStack {
                     
+
                     WelcomingTitle()
                     
                     LocationText(

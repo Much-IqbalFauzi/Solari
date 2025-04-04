@@ -22,18 +22,19 @@ struct ChoosePoint: View {
                     ZStack {
                         Rectangle()
                             .fill(Color(.systemGray6))
-                            .frame(width: 320, height: 90) // Inside rectangle size
+                            .frame(width: 320, height: 70)
+                            .cornerRadius(15)
                         
                         Text(startPoints[index].name)
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(.primary)
-                            .padding()
+//                            .padding()
                     }
                     .tag(index)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .automatic))
-            .frame(width: 320, height: 90) // Clip frame size: same height and width with inside rect
+            .frame(width: 320, height: 95) // Clip frame size: same height and width with inside rect
             .clipShape(RoundedRectangle(cornerRadius: 15) ) // Clipping with roundedRectangle shape
             .shadow(radius: 2, x: 0, y: 2)
         }
