@@ -18,26 +18,16 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        requestLocationPermission()
-    }
-    
-    private func requestLocationPermission() {
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.requestWhenInUseAuthorization()
-        } else {
-            print("Location services are disabled")
-        }
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
-            print("Location access granted")
             locationManager.startUpdatingLocation()
         case .denied, .restricted:
-            print("Location access denied")
+            locationManager.requestWhenInUseAuthorization()
         case .notDetermined:
-            break
+            locationManager.requestWhenInUseAuthorization()
         @unknown default:
             print("Unknown authorization status")
         }
@@ -62,11 +52,11 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         // TODO: OUR SPECIFIC RUNNING LOCATION
         // TODO: You can test on ur own location
-        let latitude: Double = -7.410047832999287
-        let longitude: Double =  109.43366802976672
+        let latitude: Double = -8.31320
+        let longitude: Double =   110.48115
         
         // TODO: RADIUS ON OUR RUNNING LOCATION
-        let radius: Double = 70
+        let radius: Double = 7
         
         let pointCoordinate = CLLocation(latitude: latitude, longitude: longitude)
         distance = currentLocation.distance(from: pointCoordinate)

@@ -15,8 +15,6 @@ struct HomeScreen: View {
     var body: some View {
         VStack{
             
-            LocationStatusBanner(isNear: locationManager.isNearLocation)
-            
             ZStack (alignment: .top) {
                 IllustrationHome(
                     greetingIsNearLocation: locationManager.isNearLocation
