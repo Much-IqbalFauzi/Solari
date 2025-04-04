@@ -2,7 +2,7 @@
 //  DataItem.swift
 //  Solari
 //
-//  Created by Muchamad Iqbal Fauzi on 01/04/25.
+//  Created by Muchamad Iqbal Fauzi on 04/04/25.
 //
 
 import Foundation
