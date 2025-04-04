@@ -27,7 +27,10 @@ struct ContentView: View {
                     case .home:
                         HomeScreen()
                     case .startPoint:
-                        RouteStartPointScreen()
+                        RouteStartPointScreen(
+                            locationManager: locationManager,
+                            navigationManager: navigationManager
+                        )
                     case .startProgress:
                         RunProgressScreen(runDataManager: runDataManager)
                     case .summary:
