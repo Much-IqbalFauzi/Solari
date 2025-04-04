@@ -17,7 +17,6 @@ struct RouteStartPointScreen: View {
     @StateObject var selectRouteViewModel = SelectRouteViewModel(locationManager: MyLocationManager())
     
     var body: some View {
-       
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 10) {
                     if showModalAlert {
@@ -60,7 +59,6 @@ struct RouteStartPointScreen: View {
                     }
                 }
             }
-            
         }
     }
 
