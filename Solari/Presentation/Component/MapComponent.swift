@@ -16,8 +16,13 @@ struct MapComponent: View {
         center: CLLocationCoordinate2D(latitude: -6.301856, longitude: 106.651938),
         span: MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)
     )
+    @State private var showInfoSheet = false
     
     let walkingRoute: [CLLocationCoordinate2D]
+    let titleText: String
+    let infoText: String
+    let showInfo: Bool
+    let images: [String]
     
     var body: some View {
         VStack(spacing: 10) {
@@ -28,16 +33,22 @@ struct MapComponent: View {
                 
                 VStack(spacing: 10) {
                     Button(action: {
-                        print("Info button tapped")
-                        showModalAlert = true
+                        showInfoSheet = true
                     }) {
-                        Image(systemName: "info.circle")
-                            .padding()
-                            .background(Color.white.opacity(0.8))
-                            .clipShape(Circle())
+                        if showInfo {
+                            Image(systemName: "info.circle")
+                                .padding()
+                                .background(Color.white.opacity(0.8))
+                                .clipShape(Circle())
+                        }
                     }
                     
                     Spacer()
+                        .sheet(isPresented: $showInfoSheet) {
+                            InfoModalView(titleText: titleText, infoText: infoText,images:images)
+                                .presentationDetents([.medium]) // Half-screen modal
+                                .presentationDragIndicator(.visible)
+                        }
 
                     Button(action: zoomIn) {
                         Image(systemName: "plus.magnifyingglass")
@@ -77,5 +88,5 @@ struct MapComponent: View {
         CLLocationCoordinate2D(latitude: -6.300669, longitude: 106.652796),
         CLLocationCoordinate2D(latitude: -6.302802, longitude: 106.652047)
         
-    ])
+    ], titleText: "title", infoText: "info", showInfo: false, images: ["SHORT1"])
 }

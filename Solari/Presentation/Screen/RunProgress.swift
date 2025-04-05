@@ -28,7 +28,7 @@ struct RunProgressScreen: View {
                             CLLocationCoordinate2D(latitude: -6.300669, longitude: 106.652796),
                             CLLocationCoordinate2D(latitude: -6.302802, longitude: 106.652047)
                             
-                        ]))
+                        ], titleText: "", infoText: "", showInfo: false, images: [""]))
             
             Spacer()
             RunMetricsRow(
