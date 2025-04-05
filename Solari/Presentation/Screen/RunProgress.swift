@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct RunProgressScreen: View {
     @EnvironmentObject var navigationManager: NavigationManager
@@ -20,9 +21,14 @@ struct RunProgressScreen: View {
                         .bold()
             
             Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(width: 380, height: 500)
-                        .overlay(Text("Map goes here"))
+                .fill(Color.white.opacity(0.3))
+                        .overlay(MapComponent(walkingRoute: [
+                            CLLocationCoordinate2D(latitude: -6.302802, longitude: 106.652047),
+                            CLLocationCoordinate2D(latitude: -6.301446, longitude: 106.650716),
+                            CLLocationCoordinate2D(latitude: -6.300669, longitude: 106.652796),
+                            CLLocationCoordinate2D(latitude: -6.302802, longitude: 106.652047)
+                            
+                        ]))
             
             Spacer()
             RunMetricsRow(

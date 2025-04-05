@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-// Small red circle by default
+// this is for the default red circle annotate
 class DotAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     init(coordinate: CLLocationCoordinate2D) {
@@ -16,7 +16,7 @@ class DotAnnotation: NSObject, MKAnnotation {
     }
 }
 
-// Custom label annotation with letter tag (A, B, C...)
+// this is for the custom label annotation (A, B, C...)
 class LabeledAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var label: String
@@ -110,7 +110,6 @@ struct PolylineMapView: UIViewRepresentable {
                 if view == nil {
                     view = MKAnnotationView(annotation: labeled, reuseIdentifier: id)
 
-                    // Create a label view
                     let label = UILabel()
                     label.text = labeled.label
                     label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -139,14 +138,14 @@ struct PolylineMapView: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             guard let tapped = view.annotation as? DotAnnotation else { return }
 
-            // Remove old label and restore dot
+            // this is to remove old label and restore dot
             if let active = activeAnnotation {
                 mapView.removeAnnotation(active)
                 mapView.addAnnotation(DotAnnotation(coordinate: active.coordinate))
                 activeAnnotation = nil
             }
 
-            // Replace tapped dot with label
+            // this is to replace tapped dot with label
             mapView.removeAnnotation(tapped)
 
             let index = parent.walkingRoute.firstIndex {
@@ -167,7 +166,7 @@ struct PolylineMapView: UIViewRepresentable {
             let point = gesture.location(in: mapView)
             let coord = mapView.convert(point, toCoordinateFrom: mapView)
 
-            // Deselect: remove label and show dot
+            // this is to deselect by removing label and show dot
             if let active = activeAnnotation {
                 mapView.removeAnnotation(active)
                 mapView.addAnnotation(DotAnnotation(coordinate: active.coordinate))
