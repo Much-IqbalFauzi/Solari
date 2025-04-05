@@ -16,20 +16,16 @@ struct RunProgressScreen: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text("Your Run Progress")
-                        .font(.title)
-                        .bold()
+            ProgressTitle()
+                .padding(.top, 50)
             
-            Rectangle()
-                .fill(Color.white.opacity(0.3))
-                        .overlay(MapComponent(walkingRoute: [
-                            CLLocationCoordinate2D(latitude: -6.302802, longitude: 106.652047),
-                            CLLocationCoordinate2D(latitude: -6.301446, longitude: 106.650716),
-                            CLLocationCoordinate2D(latitude: -6.300669, longitude: 106.652796),
-                            CLLocationCoordinate2D(latitude: -6.302802, longitude: 106.652047)
-                            
-                        ], titleText: "", infoText: "", showInfo: false, images: [""]))
+            //tambahin map based on routes yg mereka pilih, trus bisa ada titik2 gerak itu
             
+//            MapComponent(walkingRoute:   CLLocationCoordinate2D(latitude: -6.302802, longitude: 106.652047),
+//                         CLLocationCoordinate2D(latitude: -6.301446, longitude: 106.650716),
+//                         CLLocationCoordinate2D(latitude: -6.300669, longitude: 106.652796),
+//                         CLLocationCoordinate2D(latitude: -6.302802, longitude: 106.652047), titleText: "title", infoText: "info", showInfo: false, images: [""])
+        
             Spacer()
             RunMetricsRow(
                 duration: runDataManager.formattedElapsedTime,
@@ -44,6 +40,8 @@ struct RunProgressScreen: View {
         .onAppear {
             runDataManager.startRun()
         }
+        .padding(.bottom, 100)
+
     }
 }
 

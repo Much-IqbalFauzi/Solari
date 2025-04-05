@@ -26,12 +26,12 @@ struct RouteStartPointScreen: View {
 
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 10) {
-                    Spacer(minLength: 45)
+                    Spacer(minLength: 10)
                     if showModalAlert {
                         Alert()
                             .transition(.scale)
                     }
-                    VStack(spacing: 10) {
+                    VStack(spacing:0) {
                         
                         VStack(spacing: 10) {
                             ChooseMap()
@@ -39,6 +39,7 @@ struct RouteStartPointScreen: View {
                         
                         VStack(spacing: 10) {
                             ChoosePoint()
+                            //choosepoint ini tinggal di adjust pas long dan short berapa point dan di connect ke annotations yg muncul huruf itu. jadi pas a di click nanti lgsg ke bagian point a trus pas run now ke setnya dari situ dan seterusnya. trus pas di short run cuman 2 titik inti dan di long rung ada 3 titik inti
                             
                             RunButton(buttonText: "Run Now", action: {
                                 if (!locationManager.isNearLocation) {
@@ -57,6 +58,7 @@ struct RouteStartPointScreen: View {
                     }
                 }
             }
+            .padding(.bottom, 48)
         }
     }
 

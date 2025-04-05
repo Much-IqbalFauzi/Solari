@@ -19,7 +19,7 @@ struct HomeScreen: View {
                 IllustrationHome(
                     greetingIsNearLocation: locationManager.isNearLocation
                 )
-                    .padding(.top, 65)
+                    .padding(.top, 70)
                 VStack {
                     
 
@@ -28,7 +28,7 @@ struct HomeScreen: View {
                     LocationText(
                         greetingIsNearLocation: locationManager.isNearLocation
                     )
-                        .padding(.top, -23)
+                        .padding(.top, -20)
                 }
             }
             
@@ -50,6 +50,7 @@ struct HomeScreen: View {
                     NavigationManager.navigate(to: .startPoint)
                 })
                 .padding(.top, 5)
+                .padding(.bottom, 55)
             }
         }
     }

@@ -13,18 +13,16 @@ struct SummaryScreen: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text("Congratulations!")
-                .font(.largeTitle)
-                .bold()
+            FinishTitle()
             
-            HStack(alignment: .top) {
+            VStack() {
                 Rectangle()
-                    .fill(Color.red)
-                    .frame(width: 185, height: 410)
+                    .fill(Color.lightGray)
+                    .frame(width: 370, height: 380)
+                //ditambahin map trus ada annotations toilet dimana, makanan dimana dll jadi gausah pake foto2 gt
+                //sama kotak bawah yg 3 itu disesuaiin aja tempatnya
                 
-                Spacer()
-                
-                VStack {
+                HStack {
                     RunResultCard(runResultType: "KM", runResultValue: String(format: "%.2f", runDataManager.distanceTraveled / 1000))
                     RunResultCard(runResultType: "Minutes", runResultValue: runDataManager.formattedElapsedTime)
                     RunResultCard(
@@ -35,22 +33,7 @@ struct SummaryScreen: View {
             }
             
             VStack(spacing: 10) {
-                Rectangle()
-                    .fill(Color.orange)
-                    .frame(width: 380, height: 80)
-                
-                HStack(spacing: 10) {
-                    Rectangle()
-                        .fill(Color.black)
-                        .frame(width: 115, height: 170)
-                    
-                    Rectangle()
-                        .fill(Color.purple)
-                        .frame(width: 115, height: 170)
-                    
-                    Rectangle()
-                        .fill(Color.purple)
-                        .frame(width: 115, height: 170)
+               
                 }
             }
             Button(action: {
@@ -66,10 +49,7 @@ struct SummaryScreen: View {
             .padding(.top, 20)
 
         }
-        .padding()
     }
-}
-
 #Preview {
     SummaryScreen(runDataManager: RunDataManager(locationManager: MyLocationManager()))
 }
