@@ -17,8 +17,10 @@ struct RouteStartPointScreen: View {
     @StateObject var selectRouteViewModel = SelectRouteViewModel(locationManager: MyLocationManager())
     
     var body: some View {
+
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 10) {
+                    Spacer(minLength: 45)
                     if showModalAlert {
                         Alert()
                             .transition(.scale)
@@ -27,16 +29,6 @@ struct RouteStartPointScreen: View {
                         
                         VStack(spacing: 10) {
                             ChooseMap()
-                            
-                            Rectangle()
-                                .fill(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [.black]),
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                                .frame(width: 360, height: 80)
                         }
                         
                         VStack(spacing: 10) {
