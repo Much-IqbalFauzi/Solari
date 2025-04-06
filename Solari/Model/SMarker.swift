@@ -9,6 +9,7 @@ import MapKit
 import Foundation
 
 struct sMarker {
+    var id: UUID = UUID()
     var name: String
     var coordinate: CLLocationCoordinate2D
     
