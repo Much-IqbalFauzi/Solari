@@ -16,12 +16,12 @@ var routes: [solariRoute] = [
         obstacles: [],
         startPoints: [
             sMarker(name: markerName.EUTOPIA.rawValue, coordinate: .point1),
-            sMarker(name: markerName.EUTOPIA.rawValue, coordinate: .point3)
+            sMarker(name: markerName.CASANDREA.rawValue, coordinate: .point3)
         ],
         markers: [
             sMarker(name: markerName.EUTOPIA.rawValue, coordinate: .point1),
-            sMarker(name: markerName.EUTOPIA.rawValue, coordinate: .point2),
-            sMarker(name: markerName.EUTOPIA.rawValue, coordinate: .point3)
+            sMarker(name: markerName.DESTOPIA.rawValue, coordinate: .point2),
+            sMarker(name: markerName.CASANDREA.rawValue, coordinate: .point3)
         ]),
     
     solariRoute(
@@ -34,9 +34,9 @@ var routes: [solariRoute] = [
             sMarker(name: markerName.EUTOPIA.rawValue, coordinate: .point3)
         ],
         markers: [
-            sMarker(name: markerName.EUTOPIA.rawValue, coordinate: .point1),
             sMarker(name: markerName.EUTOPIA.rawValue, coordinate: .point2),
-            sMarker(name: markerName.EUTOPIA.rawValue, coordinate: .point3)
+            sMarker(name: markerName.CASANDREA.rawValue, coordinate: .point4),
+            sMarker(name: markerName.DESTOPIA.rawValue, coordinate: .point3)
         ]),
 ]
 
