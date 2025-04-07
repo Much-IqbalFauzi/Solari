@@ -15,7 +15,7 @@ struct RunResultCard: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(Color("summaryColor"))
-                    .frame(width: 140, height: 140)
+                    .frame(maxWidth: 140, maxHeight: 140)
                     .shadow(radius: 2, x: 0, y: 2)
                 
                 // Running Summary Text
@@ -27,11 +27,11 @@ struct RunResultCard: View {
                     Spacer()
                     
                     Text(runResultValue)
-                        .font(.system(size: 50, weight: .bold))
+                        .font(.system(size: 40, weight: .bold))
                         .minimumScaleFactor(0.5)
                 }
                 .padding(10)
-                .frame(width: 140, height: 140, alignment: .leading)
+                .frame(maxWidth: 140, maxHeight: 140, alignment: .leading)
             }
     }
 }

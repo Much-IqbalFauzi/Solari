@@ -10,6 +10,7 @@ import SwiftUI
 struct SummaryScreen: View {
     @EnvironmentObject var navigationManager: NavigationManager
     var runDataManager: RunDataManager
+    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
 
     var body: some View {
         VStack(spacing: 10) {
@@ -22,14 +23,15 @@ struct SummaryScreen: View {
                 //ditambahin map trus ada annotations toilet dimana, makanan dimana dll jadi gausah pake foto2 gt
                 //sama kotak bawah yg 3 itu disesuaiin aja tempatnya
                 
-                HStack {
+                LazyVGrid(columns: columns) {
                     RunResultCard(runResultType: "KM", runResultValue: String(format: "%.2f", runDataManager.distanceTraveled / 1000))
-                    RunResultCard(runResultType: "Minutes", runResultValue: runDataManager.formattedElapsedTime)
+                    RunResultCard(runResultType: "Minutes", runResultValue: runDataManager.formattedResultTime)
                     RunResultCard(
                         runResultType: "Min/Km",
                         runResultValue: runDataManager.formattedPace
                     )
                 }
+                .padding(.horizontal)
             }
             
             VStack(spacing: 10) {
@@ -37,7 +39,7 @@ struct SummaryScreen: View {
                 }
             }
             Button(action: {
-                navigationManager.navigate(to: .home)
+                navigationManager.reset()
             }) {
                 Text("Go to Home")
                     .font(.headline)

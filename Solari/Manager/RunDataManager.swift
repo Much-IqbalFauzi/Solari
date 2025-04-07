@@ -110,6 +110,11 @@ extension RunDataManager {
         let seconds = Int(elapsedTime) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
+    
+    var formattedResultTime: String {
+        let minutes = Int(elapsedTime)/60
+        return String(minutes)
+    }
 
     var formattedPace: String {
         guard distanceTraveled > 0 else { return "0:00" }
