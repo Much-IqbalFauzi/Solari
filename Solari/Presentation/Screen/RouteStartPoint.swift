@@ -50,31 +50,40 @@ struct RouteStartPointScreen: View {
                                     .fontWeight(.semibold)
                                     .frame(width: 380, height: 50)
                                 Map(
-//                                    initialPosition: mapCameraPosition,
+                                    //                                    initialPosition: mapCameraPosition,
                                     interactionModes: [.zoom],
                                     selection: $viewModel.selectedRouteId
                                 ) {
+                                    MapPolyline(
+                                        coordinates: route.markers.compactMap {
+                                            $0.coordinate
+                                        }
+                                    )
+                                    .stroke(.blue, lineWidth: 2.0)
                                     ForEach(
                                         Array(
                                             route.markers.enumerated()),
                                         id: \.offset
                                     ) { idx, marker in
-                                        Marker(
-                                            marker.name,
-                                            systemImage:
-                                                "figure.run.circle.fill",
-                                            coordinate: marker
-                                                .coordinate
-                                        ).tint(
-                                            viewModel
-                                                .selectedRouteId
-                                                == marker.id
-                                                ? .orange : .blue)
+
+                                        if marker.showMarker {
+                                            Marker(
+                                                marker.name,
+                                                systemImage:
+                                                    "figure.run.circle.fill",
+                                                coordinate: marker
+                                                    .coordinate
+                                            ).tint(
+                                                viewModel
+                                                    .selectedRouteId
+                                                    == marker.id
+                                                    ? .orange : .blue)
+                                        }
                                     }
                                 }.cornerRadius(15)
-                                .shadow(radius: 4)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 6)
+                                    .shadow(radius: 4)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 6)
                             }
 
                         }
@@ -90,6 +99,10 @@ struct RouteStartPointScreen: View {
                         UIPageControl.appearance()
                             .pageIndicatorTintColor =
                             UIColor.lightGray
+                        print("ON MAP APPEAR \(viewModel.selectedIndex)")
+                    }
+                    .onChange(of: viewModel.selectedIndex) { newValue in
+                        print("THE NEW VALUE IS \(newValue)")
                     }
 
                     VStack(spacing: 10) {
@@ -134,7 +147,7 @@ struct RouteStartPointScreen: View {
                     }
                 }
             }
-            
+
             .padding(.bottom, 48)
         }
     }
