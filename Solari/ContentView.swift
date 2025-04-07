@@ -35,6 +35,8 @@ struct ContentView: View {
                         RunProgressScreen(routeId: routeId, runDataManager: runDataManager)
                     case .summary:
                         SummaryScreen(runDataManager: runDataManager)
+                            .navigationBarBackButtonHidden(true)
+                            .interactiveDismissDisabled(true)
                     }
                 }
         }
