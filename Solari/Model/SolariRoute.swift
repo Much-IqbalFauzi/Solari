@@ -11,17 +11,19 @@ import MapKit
 struct solariRoute {
     var id: UUID
     var name: String = ""
-    var distance: Double = 0
     var obstacles: [String] = []
     var startPoints: [sMarker]
     var markers: [sMarker]
+    var description: String = ""
+    var imageNames: [String] = []
     
-    init(id: UUID, name: String, distance: Double, obstacles: [String], startPoints: [sMarker], markers: [sMarker]) {
+    init(id: UUID, name: String, obstacles: [String], startPoints: [sMarker], markers: [sMarker], description: String, imageNames: [String]) {
         self.id = id
         self.name = name
-        self.distance = distance
         self.obstacles = obstacles
         self.startPoints = startPoints
         self.markers = markers
+        self.description = description
+        self.imageNames = imageNames
     }
 }
