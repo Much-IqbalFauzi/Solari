@@ -100,8 +100,8 @@ struct RouteStartPointScreen: View {
                                     viewModel.listRoute[viewModel.selectedIndex]
                                         .startPoints.enumerated()), id: \.offset
                             ) { idx, marker in
-                                SquareButton(
-                                    buttonText: "No. \(idx + 1)",
+                                ChoosePoint(
+                                    buttonText: "\(idx + 1)",
                                     isActive: viewModel.selectedRouteId
                                         == marker.id,
                                     action: {
