@@ -52,11 +52,13 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         // TODO: OUR SPECIFIC RUNNING LOCATION
         // TODO: You can test on ur own location
-        let latitude: Double = -8.31320
-        let longitude: Double =   110.48115
+        // lat and long for Apple Developer Academy
+        //-6.302166926529757, 106.6525604638018
+        let latitude: Double = -6.302166926529757
+        let longitude: Double =   106.6525604638018
         
         // TODO: RADIUS ON OUR RUNNING LOCATION
-        let radius: Double = 200000
+        let radius: Double = 5000
         
         let pointCoordinate = CLLocation(latitude: latitude, longitude: longitude)
         distance = currentLocation.distance(from: pointCoordinate)

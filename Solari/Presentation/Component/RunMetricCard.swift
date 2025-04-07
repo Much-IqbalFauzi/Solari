@@ -20,7 +20,7 @@ struct RunMetricCard: View {
                 .bold()
         }
         .frame(width: 115, height: 80)
-        .background(Color.white)
+        .background(Color("summaryColor"))
         .cornerRadius(10)
     }
 }
