@@ -9,5 +9,5 @@ import CoreLocation
 
 class HomeViewModel: NSObject, ObservableObject {
     
-    
+//    @Published var progressionRoute: 
 }
