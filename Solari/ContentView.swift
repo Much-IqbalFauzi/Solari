@@ -31,8 +31,8 @@ struct ContentView: View {
                             locationManager: locationManager,
                             navigationManager: navigationManager
                         )
-                    case .startProgress:
-                        RunProgressScreen(runDataManager: runDataManager)
+                    case .startProgress(let routeId):
+                        RunProgressScreen(routeId: routeId, runDataManager: runDataManager)
                     case .summary:
                         SummaryScreen(runDataManager: runDataManager)
                     }
