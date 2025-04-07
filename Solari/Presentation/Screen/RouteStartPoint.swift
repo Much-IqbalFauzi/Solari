@@ -50,7 +50,7 @@ struct RouteStartPointScreen: View {
                                     .fontWeight(.semibold)
                                     .frame(width: 380, height: 50)
                                 Map(
-                                    initialPosition: mapCameraPosition,
+//                                    initialPosition: mapCameraPosition,
                                     interactionModes: [.zoom],
                                     selection: $viewModel.selectedRouteId
                                 ) {
@@ -71,7 +71,10 @@ struct RouteStartPointScreen: View {
                                                 == marker.id
                                                 ? .orange : .blue)
                                     }
-                                }
+                                }.cornerRadius(15)
+                                .shadow(radius: 4)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 6)
                             }
 
                         }
@@ -88,7 +91,6 @@ struct RouteStartPointScreen: View {
                             .pageIndicatorTintColor =
                             UIColor.lightGray
                     }
-                    .clipShape(RoundedRectangle(cornerRadius: 15))  // Clipping with roundedRectangle shape
 
                     VStack(spacing: 10) {
                         //                        ChoosePoint()
@@ -132,6 +134,7 @@ struct RouteStartPointScreen: View {
                     }
                 }
             }
+            
             .padding(.bottom, 48)
         }
     }
