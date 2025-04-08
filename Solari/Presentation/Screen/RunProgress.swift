@@ -10,6 +10,7 @@ import SwiftUI
 
 struct RunProgressScreen: View {
     var routeId: UUID
+    var startPointId: UUID
     @EnvironmentObject var navigationManager: NavigationManager
     @StateObject private var locationManager = MyLocationManager()
     @ObservedObject var runDataManager: RunDataManager
@@ -17,7 +18,8 @@ struct RunProgressScreen: View {
 
 //    @StateObject var viewModel: RunProgressViewModel
 
-    init(routeId: UUID, runDataManager: RunDataManager) {
+    init(routeId: UUID, startPointId: UUID, runDataManager: RunDataManager) {
+        self.startPointId = startPointId
         self.routeId = routeId
         self.runDataManager = runDataManager
 //        _viewModel = .init(wrappedValue: RunProgressViewModel(routeId: routeId, runDataManager: runDataManager, locationManager: locationManager))
@@ -60,5 +62,5 @@ struct RunProgressScreen: View {
 
 #Preview {
     RunProgressScreen(
-        routeId: UUID(), runDataManager: .init(locationManager: .init()))
+        routeId: UUID(), startPointId: UUID(), runDataManager: .init(locationManager: .init()))
 }

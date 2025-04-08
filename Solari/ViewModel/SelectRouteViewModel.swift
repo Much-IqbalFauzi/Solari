@@ -17,6 +17,8 @@ class SelectRouteViewModel: ObservableObject {
     @Published var selectedIndex = 0
     @Published var selectedRouteId: UUID?
     @Published var mapRegion: MKCoordinateRegion
+    @Published var isNearAlertShown: Bool = false
+    @Published var isStartPointSelected: Bool = false
     
     
     
@@ -30,6 +32,10 @@ class SelectRouteViewModel: ObservableObject {
 
     func navigateRunProgressHandler() {
        let selectedRouteId = self.listRoute[selectedIndex].id
-        navigationManager.navigate(to: .startProgress(routeId: selectedRouteId))
+        navigationManager.navigate(to: .startProgress(routeId: selectedRouteId, startPointId: selectedRouteId))
+    }
+    
+    func resetRouteStartPoint() {
+        self.selectedRouteId = nil
     }
 }

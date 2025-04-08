@@ -28,6 +28,6 @@ class NavigationManager: ObservableObject {
 enum RouteNav: Hashable {
     case home
     case startPoint
-    case startProgress(routeId: UUID)
+    case startProgress(routeId: UUID, startPointId: UUID)
     case summary
 }

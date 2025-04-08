@@ -33,8 +33,12 @@ struct RouteStartPointScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 10) {
-                if showModalAlert {
-                    Alert()
+                if viewModel.isNearAlertShown {
+                    Alert(title: "You're too far from Green Office Park.")
+                        .transition(.scale)
+                }
+                if viewModel.isStartPointSelected {
+                    Alert(title: "Please select start point", type: .yellow)
                         .transition(.scale)
                 }
                 VStack(spacing: 10) {
@@ -68,10 +72,9 @@ struct RouteStartPointScreen: View {
                         UIPageControl.appearance()
                             .pageIndicatorTintColor =
                             UIColor.lightGray
-                        print("ON MAP APPEAR \(viewModel.selectedIndex)")
                     }
-                    .onChange(of: viewModel.selectedIndex) { newValue in
-                        print("THE NEW VALUE IS \(newValue)")
+                    .onChange(of: viewModel.selectedIndex) {superOldValue, newValue in
+                        viewModel.resetRouteStartPoint()
                     }
 
                     VStack(spacing: 10) {
@@ -99,13 +102,26 @@ struct RouteStartPointScreen: View {
                             action: {
                                 if !locationManager.isNearLocation {
                                     withAnimation {
-                                        showModalAlert.toggle()
+                                        viewModel.isNearAlertShown.toggle()
                                     } completion: {
                                         DispatchQueue.main.asyncAfter(
                                             deadline: DispatchTime.now()
                                                 + .seconds(2)
                                         ) {
-                                            showModalAlert.toggle()
+                                            viewModel.isNearAlertShown.toggle()
+                                        }
+                                    }
+                                    return
+                                }
+                                if viewModel.selectedRouteId == nil  {
+                                    withAnimation {
+                                        viewModel.isStartPointSelected.toggle()
+                                    } completion: {
+                                        DispatchQueue.main.asyncAfter(
+                                            deadline: DispatchTime.now()
+                                                + .seconds(2)
+                                        ) {
+                                            viewModel.isStartPointSelected.toggle()
                                         }
                                     }
                                 } else {
