@@ -34,7 +34,9 @@ var routes: [solariRoute] = [
             "A strength, vertical and mix of trail and grit. Hey strength runners, this one’s for you!",
         imageNames: [
             "SHORT1", "SHORT2", "SHORT3", "SHORT4", "SHORT5", "SHORT6",
-        ]
+        ],
+        looping: 0
+
     ),
 
     solariRoute(
@@ -58,7 +60,9 @@ var routes: [solariRoute] = [
             sMarker(name: markerName.MARKETING.rawValue, coordinate: .point8),
         ],
         description: "Suits for maintain your pace with your own limits!",
-        imageNames: ["LONG1", "LONG2", "LONG3", "LONG4", "LONG5", "LONG6"]
+        imageNames: ["LONG1", "LONG2", "LONG3", "LONG4", "LONG5", "LONG6"],
+        looping: 0
+
     ),
     solariRoute(
         id: UUID(), name: "GABUT (TEST)", obstacles: [], startPoints: [
@@ -76,7 +80,28 @@ var routes: [solariRoute] = [
             sMarker(name: "p8", coordinate: .p8, showMarker: true),
             sMarker(name: "p9", coordinate: .p9, showMarker: false),
             sMarker(name: "p10", coordinate: .p10, showMarker: true),
-        ], description: "", imageNames: []),
+        ], description: "", imageNames: [],
+        looping: 0),
+    
+    solariRoute(
+        id: UUID(), name: "Strength Run", obstacles: [], startPoints: [
+            sMarker(name: "Stair A", coordinate: .p49, showMarker: true),
+            sMarker(name: "p10", coordinate: .p10, showMarker: true),
+        ],
+        markers: [
+            sMarker(name: "A", coordinate: .p49, showMarker: true),
+            sMarker(name: "p1", coordinate: .p50, showMarker: false),
+            sMarker(name: "p2", coordinate: .p51, showMarker: false),
+            sMarker(name: "p3", coordinate: .p52, showMarker: false),
+            sMarker(name: "B", coordinate: .p53, showMarker: true),
+            sMarker(name: "C", coordinate: .p54, showMarker: true),
+            sMarker(name: "p5", coordinate: .p55, showMarker: false),
+            sMarker(name: "p6", coordinate: .p56, showMarker: false),
+            sMarker(name: "p7", coordinate: .p57, showMarker: false),
+            sMarker(name: "D", coordinate: .p10, showMarker: true),
+        ], description: "", imageNames: [],
+        looping: 0
+),
 ]
 
 enum markerName: String {
