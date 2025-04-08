@@ -14,6 +14,7 @@ class RunProgressViewModel: ObservableObject {
     private var navigationManager: NavigationManager
     private var locationManager: MyLocationManager
     private var runDataManager: RunDataManager?
+    @Published var route: solariRoute
     
     init(routeId: UUID, myLocationManager: MyLocationManager, navigationManager: NavigationManager) {
         locationManager = myLocationManager
@@ -23,6 +24,7 @@ class RunProgressViewModel: ObservableObject {
         manager.startRun()
         runDataManager = manager
         progressRoute = routes.filter { $0.id == routeId }.first ?? routes.first!
+        self.route = routes.first { $0.id == routeId } ?? routes.first!
         print(progressRoute.name)
     }
 }
