@@ -16,8 +16,9 @@ struct solariRoute {
     var markers: [sMarker]
     var description: String = ""
     var imageNames: [String] = []
+    var looping: Int
     
-    init(id: UUID, name: String, obstacles: [String], startPoints: [sMarker], markers: [sMarker], description: String, imageNames: [String]) {
+    init(id: UUID, name: String, obstacles: [String], startPoints: [sMarker], markers: [sMarker], description: String, imageNames: [String], looping: Int) {
         self.id = id
         self.name = name
         self.obstacles = obstacles
@@ -25,5 +26,6 @@ struct solariRoute {
         self.markers = markers
         self.description = description
         self.imageNames = imageNames
+        self.looping = looping
     }
 }
