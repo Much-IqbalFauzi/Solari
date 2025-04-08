@@ -15,8 +15,13 @@ class RunProgressViewModel: ObservableObject {
     private var locationManager: MyLocationManager
     private var runDataManager: RunDataManager?
     @Published var route: solariRoute
+    @Published var runningRoutePoints: [sMarker] = []
+    @Published var visitedPoints: [sMarker] = []
+    private var loopingCoung: Int = 0
     
-    init(routeId: UUID, myLocationManager: MyLocationManager, navigationManager: NavigationManager) {
+    
+    init(routeId: UUID, startPointId: UUID, myLocationManager: MyLocationManager, navigationManager: NavigationManager) {
+        
         locationManager = myLocationManager
         self.navigationManager = NavigationManager()
         let manager = RunDataManager(locationManager: myLocationManager)
@@ -24,7 +29,16 @@ class RunProgressViewModel: ObservableObject {
         manager.startRun()
         runDataManager = manager
         progressRoute = routes.filter { $0.id == routeId }.first ?? routes.first!
-        self.route = routes.first { $0.id == routeId } ?? routes.first!
-        print(progressRoute.name)
+        
+        
+        self.route = progressRoute
+        self.runningRoutePoints = progressRoute.markers
+        
     }
+    
+    func runVisitingPoint(_ point: sMarker) {
+        self.visitedPoints.append(point)
+    }
+    
+    
 }
