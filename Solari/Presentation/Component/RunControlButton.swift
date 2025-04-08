@@ -30,7 +30,7 @@ struct RunControlButtons: View {
                 }
                 Button("Cancel", role: .cancel) {
                     runDataManager.cancelRun()
-                    navigationManager.navigate(to: .home)
+                    navigationManager.reset()
                 }
             } message: {
                 Text("Do you want to finish and save your run, or cancel it?")
