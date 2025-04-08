@@ -92,11 +92,11 @@ var routes: [solariRoute] = [
     
     solariRoute(
         id: UUID(), name: "Strength Run", obstacles: [], startPoints: [
-            sMarker(name: "Stair A", coordinate: .p49, showMarker: true),
-            sMarker(name: "Stair D", coordinate: .p57, showMarker: true),
+            sMarker(name: "Stair A", coordinate: .p41, showMarker: true),
+            sMarker(name: "Stair B", coordinate: .p57, showMarker: true),
         ],
         markers: [
-            sMarker(name: "A", coordinate: .p49, showMarker: true),
+            sMarker(name: "Stair A", coordinate: .p41, showMarker: false),
             sMarker(name: "p1", coordinate: .p50, showMarker: false),
             sMarker(name: "p2", coordinate: .p51, showMarker: false),
             sMarker(name: "p3", coordinate: .p52, showMarker: false),
@@ -104,8 +104,8 @@ var routes: [solariRoute] = [
             sMarker(name: "", coordinate: .p54, showMarker: true),
             sMarker(name: "p5", coordinate: .p55, showMarker: false),
             sMarker(name: "p6", coordinate: .p56, showMarker: false),
-            sMarker(name: "D", coordinate: .p57, showMarker: true),
-            sMarker(name: "A", coordinate: .p49, showMarker: false),
+            sMarker(name: "Stair B", coordinate: .p57, showMarker: true),
+            sMarker(name: "Stair A", coordinate: .p41, showMarker: true),
         ], description: "", imageNames: [],
         looping: 5
 ),
@@ -127,7 +127,7 @@ var routes: [solariRoute] = [
             sMarker(name: "p6", coordinate: .p70, showMarker: false),
             sMarker(name: "p7", coordinate: .p71, showMarker: false),
             sMarker(name: "p8", coordinate: .p67, showMarker: false),
-            sMarker(name: "p9", coordinate: .p68, showMarker: true),
+            sMarker(name: "B", coordinate: .p68, showMarker: true),
             sMarker(name: "p10", coordinate: .p27, showMarker: false),
             sMarker(name: "p11", coordinate: .p26, showMarker: false),
             sMarker(name: "p12", coordinate: .p25, showMarker: false),
@@ -143,7 +143,7 @@ var routes: [solariRoute] = [
             sMarker(name: "p6", coordinate: .p56, showMarker: false),
             sMarker(name: "A", coordinate: .p57, showMarker: true),
         ], description: "", imageNames: [],
-        looping: 3
+        looping: 4
 ),
   
 ]

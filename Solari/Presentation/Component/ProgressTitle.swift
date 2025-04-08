@@ -17,11 +17,11 @@ struct ProgressTitle: View {
             Text(title)
                 .font(.title)
                 .fontWeight(.bold)
-                .padding()
+                .padding(.top, -5)
         }
         
     }
 }
 #Preview {
-    ProgressTitle()
+    ProgressTitle(title: "ilsa")
 }
