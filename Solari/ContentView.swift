@@ -33,6 +33,8 @@ struct ContentView: View {
                         )
                     case .startProgress(let routeId):
                         RunProgressScreen(routeId: routeId, runDataManager: runDataManager)
+                            .navigationBarBackButtonHidden(true)
+                            .interactiveDismissDisabled(true)
                     case .summary:
                         SummaryScreen(runDataManager: runDataManager)
                             .navigationBarBackButtonHidden(true)

@@ -49,41 +49,10 @@ struct RouteStartPointScreen: View {
                                     .font(.system(size: 30))
                                     .fontWeight(.semibold)
                                     .frame(width: 380, height: 50)
-                                Map(
-                                    //                                    initialPosition: mapCameraPosition,
-                                    interactionModes: [.zoom],
-                                    selection: $viewModel.selectedRouteId
-                                ) {
-                                    MapPolyline(
-                                        coordinates: route.markers.compactMap {
-                                            $0.coordinate
-                                        }
-                                    )
-                                    .stroke(.blue, lineWidth: 2.0)
-                                    ForEach(
-                                        Array(
-                                            route.markers.enumerated()),
-                                        id: \.offset
-                                    ) { idx, marker in
-
-                                        if marker.showMarker {
-                                            Marker(
-                                                marker.name,
-                                                systemImage:
-                                                    "figure.run.circle.fill",
-                                                coordinate: marker
-                                                    .coordinate
-                                            ).tint(
-                                                viewModel
-                                                    .selectedRouteId
-                                                    == marker.id
-                                                    ? .orange : .blue)
-                                        }
-                                    }
-                                }.cornerRadius(15)
-                                    .shadow(radius: 4)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 6)
+                                MapOptions(
+                                    route: route,
+                                    selectedRouteId: $viewModel.selectedRouteId
+                                )
                             }
 
                         }
