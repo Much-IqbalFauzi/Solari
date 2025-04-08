@@ -13,6 +13,7 @@ struct SolariApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-        }.modelContainer(for: DataItem.self)
+        }
+        .modelContainer(for: RunSession.self)
     }
 }

@@ -9,8 +9,12 @@ import SwiftUI
 
 class NavigationManager: ObservableObject {
     @Published var path = NavigationPath()
+    var finishedRunDataManager: RunDataManager? = nil
     
-    func navigate(to route: RouteNav) {
+    func navigate(to route: RouteNav, with runDataManager: RunDataManager? = nil) {
+        if case .summary = route {
+            self.finishedRunDataManager = runDataManager
+        }
         path.append(route)
     }
     
@@ -22,6 +26,7 @@ class NavigationManager: ObservableObject {
     
     func reset() {
         path = NavigationPath()
+        finishedRunDataManager = nil
     }
 }
 

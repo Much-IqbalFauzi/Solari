@@ -10,6 +10,7 @@ struct RunControlButtons: View {
     @ObservedObject var runDataManager: RunDataManager
     @Binding var showingStopAlert: Bool
     @EnvironmentObject var navigationManager: NavigationManager
+    @Environment(\.modelContext) var modelContext
 
     var body: some View {
         HStack(spacing: 10) {
@@ -25,8 +26,9 @@ struct RunControlButtons: View {
             }
             .alert("End Run?", isPresented: $showingStopAlert) {
                 Button("Finish", role: .destructive) {
+                    try? modelContext.save()
                     runDataManager.stopRun()
-                    navigationManager.navigate(to: .summary)
+                    navigationManager.navigate(to: .summary, with: runDataManager)
                 }
                 Button("Cancel", role: .cancel) {
                     runDataManager.cancelRun()
