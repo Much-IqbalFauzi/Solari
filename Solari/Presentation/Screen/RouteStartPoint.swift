@@ -49,6 +49,7 @@ struct RouteStartPointScreen: View {
                             id: \.offset
                         ) { index, route in
                             VStack {
+                                Spacer()
                                 Text(route.name)
                                     .font(.system(size: 30))
                                     .fontWeight(.semibold)
@@ -81,7 +82,7 @@ struct RouteStartPointScreen: View {
                     VStack(spacing: 10) {
                         //                        ChoosePoint()
                         Text("Select Start Point:")
-                        Spacer()
+                       
                         HStack {
                             ForEach(
                                 Array(
