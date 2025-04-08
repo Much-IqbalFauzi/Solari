@@ -53,11 +53,41 @@ struct RouteStartPointScreen: View {
                                     .font(.system(size: 30))
                                     .fontWeight(.semibold)
                                     .frame(width: 380, height: 50)
-                                MapOptions(
-                                    route: route,
-                                    selectedRouteId: $viewModel.selectedRouteId
-                                )
-                                
+                                Map(
+                                    //                                    initialPosition: mapCameraPosition,
+                                    interactionModes: [.zoom],
+                                    selection: $viewModel.selectedRouteId
+                                ) {
+                                    MapPolyline(
+                                        coordinates: route.markers.compactMap {
+                                            $0.coordinate
+                                        }
+                                    )
+                                    .stroke(.blue, lineWidth: 8.0)
+                                    ForEach(
+                                        Array(
+                                            route.markers.enumerated()),
+                                        id: \.offset
+                                    ) { idx, marker in
+
+                                        if marker.showMarker {
+                                            Marker(
+                                                marker.name,
+                                                systemImage:
+                                                    "figure.run.circle.fill",
+                                                coordinate: marker
+                                                    .coordinate
+                                            ).tint(
+                                                viewModel
+                                                    .selectedRouteId
+                                                    == marker.id
+                                                    ? .orange : .blue)
+                                        }
+                                    }
+                                }.cornerRadius(15)
+                                    .shadow(radius: 4)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 6)
                             }
 
                         }
@@ -74,7 +104,8 @@ struct RouteStartPointScreen: View {
                             .pageIndicatorTintColor =
                             UIColor.lightGray
                     }
-                    .onChange(of: viewModel.selectedIndex) {superOldValue, newValue in
+                    .onChange(of: viewModel.selectedIndex) {
+                        superOldValue, newValue in
                         viewModel.resetRouteStartPoint()
                     }
 
@@ -89,7 +120,7 @@ struct RouteStartPointScreen: View {
                                         .startPoints.enumerated()), id: \.offset
                             ) { idx, marker in
                                 ChoosePoint(
-                                    buttonText: "\(idx + 1)",
+                                    buttonText: marker.name,
                                     isActive: viewModel.selectedRouteId
                                         == marker.id,
                                     action: {
@@ -114,7 +145,7 @@ struct RouteStartPointScreen: View {
                                     }
                                     return
                                 }
-                                if viewModel.selectedRouteId == nil  {
+                                if viewModel.selectedRouteId == nil {
                                     withAnimation {
                                         viewModel.isStartPointSelected.toggle()
                                     } completion: {
@@ -122,7 +153,8 @@ struct RouteStartPointScreen: View {
                                             deadline: DispatchTime.now()
                                                 + .seconds(2)
                                         ) {
-                                            viewModel.isStartPointSelected.toggle()
+                                            viewModel.isStartPointSelected
+                                                .toggle()
                                         }
                                     }
                                 } else {

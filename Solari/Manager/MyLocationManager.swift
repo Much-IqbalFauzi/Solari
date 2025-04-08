@@ -13,9 +13,11 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var currentLocation: CLLocation?
     @Published var isNearLocation: Bool = false
     @Published var distance: Double?
+    @Published var location2D: CLLocationCoordinate2D?
     
     override init() {
         super.init()
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
@@ -45,7 +47,6 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private func updateDistance() {
         guard let currentLocation = currentLocation else {
-            print("Current location is nil")
             isNearLocation = false
             return
         }
@@ -65,8 +66,8 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         isNearLocation = distance ?? 0 <= radius
         
-        print("Current Location: \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
-        print("Distance to Target: \(distance ?? 0) meters")
-        print("Is Near: \(isNearLocation)")
+//        print("Current Location: \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
+//        print("Distance to Target: \(distance ?? 0) meters")
+//        print("Is Near: \(isNearLocation)")
     }
 }
