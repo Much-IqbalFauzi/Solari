@@ -29,11 +29,17 @@ struct SummaryScreen: View {
                 Text(String("\(runSessions.count) Run Sessions"))
                 
                 LazyVGrid(columns: columns) {
-                    RunResultCard(runResultType: "KM", runResultValue: String(format: "%.2f", runDataManager.distanceTraveled / 1000))
-                    RunResultCard(runResultType: "Minutes", runResultValue: runDataManager.formattedResultTime)
+                    RunResultCard(
+                        runResultType: "KM",
+                        runResultValue: String(
+                            format: "%.2f",
+                            runSessions.last?.distance ?? 0
+                        )
+                    )
+                    RunResultCard(runResultType: "Minutes", runResultValue: String(format: "%.2f", runSessions.last?.duration ?? 0))
                     RunResultCard(
                         runResultType: "Min/Km",
-                        runResultValue: runDataManager.formattedPace
+                        runResultValue: String(format: "%.2f", runSessions.last?.pace ?? 0)
                     )
                 }
                 .padding(.horizontal)
