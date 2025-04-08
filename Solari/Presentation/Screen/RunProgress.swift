@@ -37,7 +37,7 @@ struct RunProgressScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 10) {
                 ProgressTitle(title: viewModel.route.name)
-                    .padding(.top, 10)
+                    .padding(.top, 40)
 
 //                MapOptions(
 //                    route: viewModel.route, selectedRouteId: .constant(nil)

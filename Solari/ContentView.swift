@@ -31,11 +31,13 @@ struct ContentView: View {
                             locationManager: locationManager,
                             navigationManager: navigationManager
                         )
+                        .toolbarBackground(.hidden, for: .navigationBar)
 //                        .
                     case .startProgress(let routeId, let startPointId):
                         RunProgressScreen(routeId: routeId, startPointId: startPointId, runDataManager: runDataManager)
                             .navigationBarBackButtonHidden(true)
                             .interactiveDismissDisabled(true)
+                        
                     case .summary:
                         SummaryScreen(runDataManager: runDataManager)
                             .navigationBarBackButtonHidden(true)

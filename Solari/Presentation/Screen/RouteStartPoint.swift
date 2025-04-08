@@ -13,10 +13,11 @@ struct RouteStartPointScreen: View {
     @ObservedObject private var locationManager: MyLocationManager
     @StateObject var viewModel: SelectRouteViewModel
 
-    let mapCameraPosition: MapCameraPosition = .region(
-        .init(
-            center: .init(latitude: -6.30137, longitude: 106.65303),
-            latitudinalMeters: 340, longitudinalMeters: 340))
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: -6.30147, longitude: 106.65196),
+        latitudinalMeters: 340,
+        longitudinalMeters: 340
+    )
 
     init(
         locationManager: MyLocationManager, navigationManager: NavigationManager
@@ -54,41 +55,10 @@ struct RouteStartPointScreen: View {
                                     .font(.system(size: 30))
                                     .fontWeight(.semibold)
                                     .frame(width: 380, height: 50)
-                                Map(
-                                    //                                    initialPosition: mapCameraPosition,
-                                    interactionModes: [.zoom],
-                                    selection: $viewModel.selectedRouteId
-                                ) {
-                                    MapPolyline(
-                                        coordinates: route.markers.compactMap {
-                                            $0.coordinate
-                                        }
-                                    )
-                                    .stroke(.blue, lineWidth: 8.0)
-                                    ForEach(
-                                        Array(
-                                            route.markers.enumerated()),
-                                        id: \.offset
-                                    ) { idx, marker in
-
-                                        if marker.showMarker {
-                                            Marker(
-                                                marker.name,
-                                                systemImage:
-                                                    "figure.run.circle.fill",
-                                                coordinate: marker
-                                                    .coordinate
-                                            ).tint(
-                                                viewModel
-                                                    .selectedRouteId
-                                                    == marker.id
-                                                    ? .orange : .blue)
-                                        }
-                                    }
-                                }.cornerRadius(15)
-                                    .shadow(radius: 4)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 6)
+                                MapComponent(
+                                    route: route,
+                                    selectedRouteId: $viewModel.selectedRouteId
+                                )
                             }
 
                         }
@@ -111,9 +81,7 @@ struct RouteStartPointScreen: View {
                     }
 
                     VStack(spacing: 10) {
-                        //                        ChoosePoint()
                         Text("Select Start Point:")
-                       
                         HStack {
                             ForEach(
                                 Array(
