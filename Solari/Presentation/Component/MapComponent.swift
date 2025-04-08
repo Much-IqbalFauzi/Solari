@@ -47,6 +47,7 @@ struct MapComponent: View {
                     id: \.offset
                 ) { idx, marker in
                     
+                    
                     if marker.showMarker {
                         Marker(
                             marker.name,

@@ -12,13 +12,13 @@ struct RouteStartPointScreen: View {
     @State private var showModalAlert = false
     @ObservedObject private var locationManager: MyLocationManager
     @StateObject var viewModel: SelectRouteViewModel
+    @State private var showInfoSheet = false
 
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: -6.30147, longitude: 106.65196),
         latitudinalMeters: 340,
         longitudinalMeters: 340
     )
-
     init(
         locationManager: MyLocationManager, navigationManager: NavigationManager
     ) {
@@ -28,7 +28,6 @@ struct RouteStartPointScreen: View {
                 locationManager: locationManager,
                 navigationManager: navigationManager
             ))
-
     }
 
     var body: some View {
@@ -51,10 +50,28 @@ struct RouteStartPointScreen: View {
                         ) { index, route in
                             VStack {
                                 Spacer()
-                                Text(route.name)
-                                    .font(.system(size: 30))
-                                    .fontWeight(.semibold)
-                                    .frame(width: 380, height: 50)
+                                HStack (
+                                    spacing: -80
+                                ){
+                                    Text(route.name)
+                                        .font(.system(size: 30))
+                                        .fontWeight(.semibold)
+                                        .frame(width: 380, height: 50)
+                                    Button(action: {
+                                        showInfoSheet = true
+                                          }) {
+                                                  Image(systemName: "info.circle")
+                                                      .padding()
+                                                      .font(.system(size: 25))
+                                                      .clipShape(Circle())
+                                              }
+                                          Spacer()
+                                              .sheet(isPresented: $showInfoSheet) {
+                                                  InfoModalView(titleText: route.name, infoText: route.description,images:route.imageNames)
+                                                      .presentationDetents([.medium])
+                                                      .presentationDragIndicator(.visible)
+                                              }
+                    }
                                 MapComponent(
                                     route: route,
                                     selectedRouteId: $viewModel.selectedRouteId

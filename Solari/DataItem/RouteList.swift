@@ -87,7 +87,7 @@ var routes: [solariRoute] = [
             sMarker(name: "A", coordinate: .p30, showMarker: true),
             sMarker(name: "p16", coordinate: .p31, showMarker: false),
             sMarker(name: "p1", coordinate: .p1, showMarker: false),
-        ], description: "", imageNames: [],
+        ], description: "Suits for maintain your pace with your own limits!\n - ±5 km (6x laps)\n - ± 60 m Elevation gain in total\n - 3 Points\n - No stairs\n - Concrete blocks path, Pedestrian\n - Adjacent to the roads", imageNames: ["LONG1", "LONG2", "LONG3", "LONG4", "LONG5", "LONG6"],
         looping: 6),
     
     solariRoute(
@@ -95,6 +95,7 @@ var routes: [solariRoute] = [
             sMarker(name: "Stair A", coordinate: .p41, showMarker: true),
             sMarker(name: "Stair B", coordinate: .p57, showMarker: true),
         ],
+        
         markers: [
             sMarker(name: "Stair A", coordinate: .p41, showMarker: false),
             sMarker(name: "p1", coordinate: .p50, showMarker: false),
@@ -106,7 +107,7 @@ var routes: [solariRoute] = [
             sMarker(name: "p6", coordinate: .p56, showMarker: false),
             sMarker(name: "Stair B", coordinate: .p57, showMarker: true),
             sMarker(name: "Stair A", coordinate: .p41, showMarker: true),
-        ], description: "", imageNames: [],
+        ], description: "A strength, vertical and mix of trail and grit. Hey strength runners, this one’s for you!\n - ±1 km Run (5x laps)\n - 5x Upstairs\n - 5x Downstairs\n - ±45 m Elevation gain in total\n - Concrete blocks path, Pedestrian\n - Adjacent to the roads at the bottom", imageNames: ["SHORT1", "SHORT2", "SHORT3", "SHORT4", "SHORT5", "SHORT6"],
         looping: 5
 ),
     
@@ -142,7 +143,7 @@ var routes: [solariRoute] = [
             sMarker(name: "p5", coordinate: .p55, showMarker: false),
             sMarker(name: "p6", coordinate: .p56, showMarker: false),
             sMarker(name: "A", coordinate: .p57, showMarker: true),
-        ], description: "", imageNames: [],
+        ], description: "A strength, vertical and mix of trail and grit. Hey strength runners, this one’s for you!\n - ±1 km Run (5x laps)\n - 5x Upstairs\n - 5x Downstairs\n - ±45 m Elevation gain in total\n - Concrete blocks path, Pedestrian\n - Adjacent to the roads at the bottom", imageNames: ["SHORT1", "SHORT2", "SHORT3", "SHORT4", "SHORT5", "SHORT6"],
         looping: 4
 ),
   
