@@ -57,6 +57,7 @@ struct RouteStartPointScreen: View {
                                     route: route,
                                     selectedRouteId: $viewModel.selectedRouteId
                                 )
+                                
                             }
 
                         }
