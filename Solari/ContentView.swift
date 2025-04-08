@@ -11,7 +11,7 @@ struct ContentView: View {
     @StateObject private var navigationManager = NavigationManager()
     @StateObject private var locationManager = MyLocationManager()
     @StateObject var runDataManager: RunDataManager
-//    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     
     init() {
         let locationManager = MyLocationManager()
@@ -41,6 +41,11 @@ struct ContentView: View {
                             .interactiveDismissDisabled(true)
                     }
                 }
+        }
+        .onAppear {
+            runDataManager.onSave = { runSession in
+                modelContext.insert(runSession)
+            }
         }
         .environmentObject(navigationManager)
     }

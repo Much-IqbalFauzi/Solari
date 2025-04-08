@@ -87,6 +87,13 @@ class RunDataManager: ObservableObject {
             distance: distanceTraveled,
             pace: currentPace
         )
+        
+        // Print each value before saving
+        print("Saving RunSession:")
+        print("Date: \(run.date)")
+        print("Duration (seconds): \(run.duration)")
+        print("Distance (meters): \(run.distance)")
+        print("Pace (min/km): \(run.pace)")
 
         onSave?(run)
     }
@@ -105,6 +112,14 @@ class RunDataManager: ObservableObject {
 }
 
 extension RunDataManager {
+    static func formatPace(elapsedTime: TimeInterval, distanceInMeters: Double) -> String {
+            guard distanceInMeters > 0 else { return "0:00" }
+            let paceInSecondsPerKm = elapsedTime / (distanceInMeters / 1000)
+            let minutes = Int(paceInSecondsPerKm) / 60
+            let seconds = Int(paceInSecondsPerKm) % 60
+            return String(format: "%d:%02d", minutes, seconds)
+    }
+    
     var formattedElapsedTime: String {
         let minutes = Int(elapsedTime) / 60
         let seconds = Int(elapsedTime) % 60
@@ -122,5 +137,9 @@ extension RunDataManager {
         let minutes = Int(paceInSecondsPerKm) / 60
         let seconds = Int(paceInSecondsPerKm) % 60
         return String(format: "%d:%02d", minutes, seconds)
+    }
+    
+    var formattedPaceSummary: String {
+        RunDataManager.formatPace(elapsedTime: elapsedTime, distanceInMeters: distanceTraveled)
     }
 }
