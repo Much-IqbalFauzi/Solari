@@ -14,13 +14,19 @@ struct RunProgressScreen: View {
     @StateObject private var locationManager = MyLocationManager()
     @ObservedObject var runDataManager: RunDataManager
     @State private var showingStopAlert = false
-
-//    @StateObject var viewModel: RunProgressViewModel
+    @StateObject private var viewModel: RunProgressViewModel
 
     init(routeId: UUID, runDataManager: RunDataManager) {
         self.routeId = routeId
         self.runDataManager = runDataManager
-//        _viewModel = .init(wrappedValue: RunProgressViewModel(routeId: routeId, runDataManager: runDataManager, locationManager: locationManager))
+        let navManager = NavigationManager()
+        let locationManager = MyLocationManager()
+        
+        _viewModel = StateObject(wrappedValue: RunProgressViewModel(
+                    routeId: routeId,
+                    myLocationManager: locationManager,
+                    navigationManager: navManager
+                ))
     }
 
     var body: some View {
@@ -34,6 +40,10 @@ struct RunProgressScreen: View {
             //                         CLLocationCoordinate2D(latitude: -6.301446, longitude: 106.650716),
             //                         CLLocationCoordinate2D(latitude: -6.300669, longitude: 106.652796),
             //                         CLLocationCoordinate2D(latitude: -6.302802, longitude: 106.652047), titleText: "title", infoText: "info", showInfo: false, images: [""])
+            
+            MapOptions(route: viewModel.route, selectedRouteId: .constant(nil))
+                .padding()
+                .frame(width: 380, height: 480)
 
             Spacer()
             RunMetricsRow(
