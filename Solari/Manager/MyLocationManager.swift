@@ -13,7 +13,7 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var currentLocation: CLLocation?
     @Published var isNearLocation: Bool = false
     @Published var distance: Double?
-    @Published var location2D: CLLocationCoordinate2D?
+    @Published var userLocation2D: CLLocationCoordinate2D?
     
     override init() {
         super.init()
@@ -41,6 +41,7 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         // Ensure run on main thread
         DispatchQueue.main.async { [weak self] in
             self?.currentLocation = latestLocation
+            self?.userLocation2D = CLLocationCoordinate2D(latitude: latestLocation.coordinate.latitude, longitude: latestLocation.coordinate.longitude)
             self?.updateDistance()
         }
     }
@@ -50,6 +51,8 @@ class MyLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             isNearLocation = false
             return
         }
+        
+        self.userLocation2D = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         
         // TODO: OUR SPECIFIC RUNNING LOCATION
         // TODO: You can test on ur own location

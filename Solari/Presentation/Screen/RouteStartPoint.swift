@@ -49,33 +49,45 @@ struct RouteStartPointScreen: View {
                             id: \.offset
                         ) { index, route in
                             VStack {
-                                Spacer()
-                                HStack (
-                                    spacing: -80
-                                ){
-                                    Text(route.name)
-                                        .font(.system(size: 30))
-                                        .fontWeight(.semibold)
-                                        .frame(width: 380, height: 50)
-                                    Button(action: {
-                                        showInfoSheet = true
-                                          }) {
-                                                  Image(systemName: "info.circle")
-                                                      .padding()
-                                                      .font(.system(size: 25))
-                                                      .clipShape(Circle())
-                                              }
-                                          Spacer()
-                                              .sheet(isPresented: $showInfoSheet) {
-                                                  InfoModalView(titleText: route.name, infoText: route.description,images:route.imageNames)
-                                                      .presentationDetents([.medium])
-                                                      .presentationDragIndicator(.visible)
-                                              }
-                    }
-                                MapComponent(
-                                    route: route,
-                                    selectedRouteId: $viewModel.selectedRouteId
-                                )
+                                Text(route.name)
+                                    .font(.system(size: 30))
+                                    .fontWeight(.semibold)
+                                    .frame(width: 380, height: 50)
+                                Map(
+                                    //                                    initialPosition: mapCameraPosition,
+                                    interactionModes: [.zoom],
+                                    selection: $viewModel.selectedRouteId
+                                ) {
+                                    MapPolyline(
+                                        coordinates: route.markers.compactMap {
+                                            $0.coordinate
+                                        }
+                                    )
+                                    .stroke(.blue, lineWidth: 8.0)
+                                    ForEach(
+                                        Array(
+                                            route.markers.enumerated()),
+                                        id: \.offset
+                                    ) { idx, marker in
+
+                                        if marker.showMarker {
+                                            Marker(
+                                                marker.name,
+                                                systemImage:
+                                                    "figure.run.circle.fill",
+                                                coordinate: marker
+                                                    .coordinate
+                                            ).tint(
+                                                viewModel
+                                                    .selectedStartPoint
+                                                    == marker.id
+                                                    ? .orange : .blue)
+                                        }
+                                    }
+                                }.cornerRadius(15)
+                                    .shadow(radius: 4)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 6)
                             }
 
                         }
@@ -107,10 +119,10 @@ struct RouteStartPointScreen: View {
                             ) { idx, marker in
                                 ChoosePoint(
                                     buttonText: marker.name,
-                                    isActive: viewModel.selectedRouteId
+                                    isActive: viewModel.selectedStartPoint
                                         == marker.id,
                                     action: {
-                                        viewModel.selectedRouteId = marker.id
+                                        viewModel.selectedStartPoint = marker.id
                                     })
                             }
                         }
@@ -131,7 +143,7 @@ struct RouteStartPointScreen: View {
                                     }
                                     return
                                 }
-                                if viewModel.selectedRouteId == nil {
+                                if viewModel.selectedStartPoint == nil {
                                     withAnimation {
                                         viewModel.isStartPointSelected.toggle()
                                     } completion: {

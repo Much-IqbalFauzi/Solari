@@ -11,6 +11,7 @@ import SwiftUI
 struct RunProgressScreen: View {
     var routeId: UUID
     var startPointId: UUID
+
     @EnvironmentObject var navigationManager: NavigationManager
     @StateObject private var locationManager = MyLocationManager()
     @ObservedObject var runDataManager: RunDataManager
@@ -28,7 +29,6 @@ struct RunProgressScreen: View {
             wrappedValue: RunProgressViewModel(
                 routeId: routeId,
                 startPointId: startPointId,
-                myLocationManager: locationManager,
                 navigationManager: navManager
             ))
     }
@@ -37,22 +37,33 @@ struct RunProgressScreen: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 10) {
                 ProgressTitle(title: viewModel.route.name)
-                    .padding(.top, 40)
 
-//                MapOptions(
-//                    route: viewModel.route, selectedRouteId: .constant(nil)
-//                )
-//                .padding()
-//                .frame(width: 380, height: 420)
                 Map(
                     interactionModes: [.zoom]
                 ) {
-//                    MapPolyline(
-//                        coordinates: [locationManager.currentLocation?.coordinate]
-//                    )
-//                    .stroke(.blue, lineWidth: 8.0)
+                   MapPolyline(
+                        coordinates: viewModel.route.markers.compactMap {
+                            $0.coordinate
+                        }
+                    )
+                    .stroke(.blue, lineWidth: 8.0)
+                    UserAnnotation()
+                        .stroke(Color.red, lineWidth: 8.0)
+                        .mapOverlayLevel(level: MKOverlayLevel.aboveRoads)
+                        .tint(.red)
+                        
+                    //TODO: NEXT POINT MARKER
+                    ForEach(Array(viewModel.runningRoutePoints.enumerated()), id: \.offset) { idx, point in
+                        Marker(
+                            point.name,
+                            systemImage: "figure.run.circle.fill",
+                            coordinate: point.coordinate
+                        )
+                        .tint(.orange)
+                    }
 
-                    ForEach(viewModel.route.markers.indices, id: \.self) { idx in
+                    ForEach(viewModel.route.markers.indices, id: \.self) {
+                        idx in
                         let marker = viewModel.route.markers[idx]
                         if marker.showMarker {
                             Marker(
@@ -70,7 +81,8 @@ struct RunProgressScreen: View {
                 .padding(.vertical, 6)
                 .frame(width: 380, height: 420)
 
-                Spacer()
+                RunMetricCard(title: "Your next destination:", value: viewModel.runningRoutePoints.last?.name ?? "Unknown")
+//                Spacer()
                 RunMetricsRow(
                     duration: runDataManager.formattedElapsedTime,
                     distance: String(
@@ -89,6 +101,7 @@ struct RunProgressScreen: View {
             .onAppear {
                 runDataManager.startRun()
             }
+        
             .padding(.bottom, 100)
         }
 
