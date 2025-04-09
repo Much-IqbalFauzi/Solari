@@ -6,11 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HomeScreen: View {
     
     @StateObject private var locationManager = MyLocationManager()
-    @EnvironmentObject var NavigationManager: NavigationManager
+    @EnvironmentObject var navigationManager: NavigationManager
+    @State private var refreshID = UUID()
+    @Query var runSessions: [RunSession]
+    
+    var viewModel: HomeViewModel {
+        HomeViewModel(sessions: runSessions)
+    }
     
     var body: some View {
         VStack{
@@ -40,20 +47,25 @@ struct HomeScreen: View {
                 
                 
                 HStack {
-                    ForEach(CardSummary.summaries, id: \.summaryType) {
-                        summary in summary
+                    ForEach(viewModel.summaries, id: \.summaryType) { summary in
+                        summary
                             .padding(.top, -50)
                     }
                 }
                 
                 RunButton(buttonText: "Select Routes", action: {
-                    NavigationManager.navigate(to: .startPoint)
+                    navigationManager.navigate(to: .startPoint)
                 })
                 .padding(.top, 5)
                 .padding(.bottom, 55)
             }
         }
+        .id(refreshID)
+        .onAppear {
+            refreshID = UUID()
+        }
     }
+
 }
 
 #Preview {

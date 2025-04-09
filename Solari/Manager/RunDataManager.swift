@@ -109,6 +109,32 @@ class RunDataManager: ObservableObject {
 
         lastLocation = location
     }
+    
+    func formatPaceString(distance: Double, time: TimeInterval) -> String {
+        guard distance > 0 else { return "0:00" }
+
+        let paceInSecondsPerKm = time / (distance / 1000) // seconds per km
+        let minutes = Int(paceInSecondsPerKm) / 60
+        let seconds = Int(paceInSecondsPerKm) % 60
+
+        return String(format: "%d:%02d", minutes, seconds)
+    }
+    
+    func formatDistanceInKM(_ distance: Double) -> String {
+        let distanceInKM = distance / 1000
+        return String(format: "%.2f", distanceInKM)
+    }
+    
+    func formatDuration(_ time: TimeInterval) -> String {
+        let minutes = Int(time) / 60
+        let seconds = Int(time) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    func formatDurationInDecimalMinutes(_ time: TimeInterval) -> String {
+        let minutes = time / 60.0
+        return String(format: "%.2f min", minutes)
+    }
 }
 
 extension RunDataManager {

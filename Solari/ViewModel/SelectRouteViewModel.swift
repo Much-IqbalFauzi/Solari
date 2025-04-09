@@ -23,9 +23,7 @@ class SelectRouteViewModel: ObservableObject {
     
     
     init(locationManager: MyLocationManager, navigationManager: NavigationManager) {
-//        self.locationManager = locationManager
         self.navigationManager = navigationManager
-//        self.runDataManager = RunDataManager(locationManager: locationManager)
         self.listRoute = routes
         self.mapRegion = mapStaticRegion
     }
