@@ -108,8 +108,8 @@ struct RunProgressScreen: View {
     }
 }
 
-#Preview {
-    RunProgressScreen(
-        routeId: UUID(), startPointId: UUID(),
-        runDataManager: .init(locationManager: .init()))
-}
+//#Preview {
+//    RunProgressScreen(
+//        routeId: UUID(), startPointId: UUID(),
+//        runDataManager: .init(locationManager: .init()))
+//}

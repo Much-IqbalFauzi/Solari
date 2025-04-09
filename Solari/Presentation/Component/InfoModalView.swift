@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InfoModalView: View {
     
-    var titleText: String
+    @State var titleText: String
     var infoText: String
     
     let images: [String]

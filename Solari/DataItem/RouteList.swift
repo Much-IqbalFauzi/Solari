@@ -108,7 +108,7 @@ var routes: [solariRoute] = [
             sMarker(name: "p5", coordinate: .p55, showMarker: false),
             sMarker(name: "p6", coordinate: .p56, showMarker: false),
             sMarker(name: "D", coordinate: .p57, showMarker: true),
-        ], description: "", imageNames: [],
+        ], description: "", imageNames: ["LONG1", "LONG2", "LONG3", "LONG4", "LONG5", "LONG6"],
         looping: 5
     ),
 
@@ -145,7 +145,7 @@ var routes: [solariRoute] = [
             sMarker(name: "p5", coordinate: .p55, showMarker: false),
             sMarker(name: "p6", coordinate: .p56, showMarker: false),
             sMarker(name: "A", coordinate: .p57, showMarker: true),
-        ], description: "", imageNames: [],
+        ], description: "", imageNames: ["LONG1", "LONG2", "LONG3", "LONG4", "LONG5", "LONG6"],
         looping: 3
     ),
 
@@ -164,7 +164,7 @@ var routes: [solariRoute] = [
             .p5,
             .p6,
             .p7,
-        ], description: "", imageNames: [],
+        ], description: "", imageNames: ["LONG1", "LONG2", "LONG3", "LONG4", "LONG5", "LONG6"],
         looping: 5
     ),
 ]
