@@ -41,7 +41,7 @@ struct RunProgressScreen: View {
                 Map(
                     interactionModes: [.zoom]
                 ) {
-                   MapPolyline(
+                    MapPolyline(
                         coordinates: viewModel.route.markers.compactMap {
                             $0.coordinate
                         }
@@ -50,16 +50,19 @@ struct RunProgressScreen: View {
                     UserAnnotation()
                         .stroke(Color.red, lineWidth: 8.0)
                         .mapOverlayLevel(level: MKOverlayLevel.aboveRoads)
-                        .tint(.red)
-                        
+                        .tint(Color.greenYellow)
+
                     //TODO: NEXT POINT MARKER
-                    ForEach(Array(viewModel.runningRoutePoints.enumerated()), id: \.offset) { idx, point in
+                    ForEach(
+                        Array(viewModel.runningRoutePoints.enumerated()),
+                        id: \.offset
+                    ) { idx, point in
                         Marker(
                             point.name,
                             systemImage: "figure.run.circle.fill",
                             coordinate: point.coordinate
                         )
-                        .tint(.orange)
+                        .tint(Color.greenYellow)
                     }
 
                     ForEach(viewModel.route.markers.indices, id: \.self) {
@@ -81,8 +84,8 @@ struct RunProgressScreen: View {
                 .padding(.vertical, 6)
                 .frame(width: 380, height: 420)
 
-//                RunMetricCard(title: "Your next destination:", value: viewModel.runningRoutePoints.last?.name ?? "Unknown")
-//                Spacer()
+                //                RunMetricCard(title: "Your next destination:", value: viewModel.runningRoutePoints.last?.name ?? "Unknown")
+                //                Spacer()
                 RunMetricsRow(
                     duration: runDataManager.formattedElapsedTime,
                     distance: String(
@@ -92,7 +95,16 @@ struct RunProgressScreen: View {
                 )
                 RunControlButtons(
                     runDataManager: runDataManager,
-                    showingStopAlert: $showingStopAlert)
+                    showingStopAlert: $showingStopAlert,
+                    cancel: {
+                        runDataManager.cancelRun()
+                        navigationManager.reset()
+                    },
+                    finish: {
+                        runDataManager.stopRun()
+                        navigationManager.navigate(
+                            to: .summary(routeId: routeId), with: runDataManager)
+                    })
             }
             .onReceive(locationManager.$currentLocation.compactMap { $0 }) {
                 location in
@@ -101,7 +113,7 @@ struct RunProgressScreen: View {
             .onAppear {
                 runDataManager.startRun()
             }
-        
+
             .padding(.bottom, 100)
         }
 

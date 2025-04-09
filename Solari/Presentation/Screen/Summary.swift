@@ -5,33 +5,79 @@
 //  Created by Muchamad Iqbal Fauzi on 25/03/25.
 //
 
-import SwiftUI
+import MapKit
 import SwiftData
+import SwiftUI
 
 struct SummaryScreen: View {
+    var routeId: UUID
     @EnvironmentObject var navigationManager: NavigationManager
     var runDataManager: RunDataManager
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-    @Query(sort: \RunSession.date, order: .forward) var runSessions: [RunSession]
-    
+    @Query(sort: \RunSession.date, order: .forward) var runSessions:
+        [RunSession]
+
+    @StateObject private var viewModel: SummaryViewModel
+
+    init(routeId: UUID, runDataManager: RunDataManager) {
+        self.routeId = routeId
+        self.runDataManager = runDataManager
+        _viewModel = StateObject(
+            wrappedValue: SummaryViewModel(
+                routeId: routeId
+            ))
+    }
+
     var body: some View {
         VStack(spacing: 10) {
+            Spacer()
             FinishTitle()
-            
-            VStack() {
-                Rectangle()
-                    .fill(Color.lightGray)
-                    .frame(width: 370, height: 380)
-                
+
+            VStack {
+                Map(
+                    interactionModes: [.zoom]
+                ) {
+                    MapPolyline(
+                        coordinates: viewModel.route.markers.compactMap {
+                            $0.coordinate
+                        }
+                    )
+                    .stroke(.blue, lineWidth: 8.0)
+                    UserAnnotation()
+                        .stroke(Color.red, lineWidth: 8.0)
+                        .mapOverlayLevel(level: MKOverlayLevel.aboveRoads)
+                        .tint(.red)
+
+                    ForEach(viewModel.route.markers.indices, id: \.self) {
+                        idx in
+                        let marker = viewModel.route.markers[idx]
+                        if marker.showMarker {
+                            Marker(
+                                marker.name,
+                                systemImage: "figure.run.circle.fill",
+                                coordinate: marker.coordinate
+                            )
+                            .tint(.blue)
+                        }
+                    }
+                }
+                .cornerRadius(15)
+                .shadow(radius: 4)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .frame(width: 380, height: 360)
+
                 LazyVGrid(columns: columns) {
                     RunResultCard(
                         runResultType: "Distance",
-                        runResultValue: runDataManager.formatDistanceInKM(runSessions.last?.distance ?? 0)
+                        runResultValue: runDataManager.formatDistanceInKM(
+                            runSessions.last?.distance ?? 0)
                     )
 
                     RunResultCard(
                         runResultType: "Duration",
-                        runResultValue: runDataManager.formatDuration(runSessions.last?.duration ?? 0)
+                        runResultValue: runDataManager.formatDuration(
+                            runSessions.last?.duration ?? 0)
                     )
 
                     RunResultCard(
@@ -44,26 +90,23 @@ struct SummaryScreen: View {
                 }
                 .padding(.horizontal)
             }
-            
+
             VStack(spacing: 10) {
-                
+
             }
         }
-        Button(action: {
-            navigationManager.reset()
-        }) {
-            Text("Back to Home")
-                .font(.headline)
-                .frame(width: 200, height: 50)
-                .background(.black)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-        }
-        .padding(.top, 20)
         
+        RunButton(buttonText: "Back to Home", trailingIcon: "", action: {
+            navigationManager.reset()
+        })
+        .padding(.top, 5)
+        .padding(.bottom, 55)
+
     }
 }
 
 #Preview {
-    SummaryScreen(runDataManager: RunDataManager(locationManager: MyLocationManager()))
+    SummaryScreen(
+        routeId: UUID(),
+        runDataManager: RunDataManager(locationManager: MyLocationManager()))
 }

@@ -123,7 +123,7 @@ struct RouteStartPointScreen: View {
                                                     viewModel
                                                         .selectedStartPoint
                                                     == marker.id
-                                                    ? .orange : .blue)
+                                                    ? Color.greenYellow : .blue)
                                             }
                                         }
                                     }.cornerRadius(15)
@@ -177,6 +177,7 @@ struct RouteStartPointScreen: View {
 
                     VStack(spacing: 10) {
                         Text("Select Start Point:")
+                            .font(.headline)
                         HStack {
                             ForEach(
                                 Array(

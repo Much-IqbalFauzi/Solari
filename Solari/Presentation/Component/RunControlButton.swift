@@ -10,6 +10,9 @@ struct RunControlButtons: View {
     @ObservedObject var runDataManager: RunDataManager
     @Binding var showingStopAlert: Bool
     @EnvironmentObject var navigationManager: NavigationManager
+    
+    var cancel: () -> Void = {}
+    var finish: () -> Void = {}
 
     var body: some View {
         HStack(spacing: 10) {
@@ -25,12 +28,14 @@ struct RunControlButtons: View {
             }
             .alert("End Run?", isPresented: $showingStopAlert) {
                 Button("Finish", role: .destructive) {
-                    runDataManager.stopRun()
-                    navigationManager.navigate(to: .summary, with: runDataManager)
+                    finish()
+//                    runDataManager.stopRun()
+//                    navigationManager.navigate(to: .summary, with: runDataManager)
                 }
                 Button("Cancel", role: .cancel) {
-                    runDataManager.cancelRun()
-                    navigationManager.reset()
+                    cancel()
+//                    runDataManager.cancelRun()
+//                    navigationManager.reset()
                 }
             } message: {
                 Text("Do you want to finish and save your run, or cancel it?")
