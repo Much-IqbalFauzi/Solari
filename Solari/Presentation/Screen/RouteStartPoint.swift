@@ -16,7 +16,6 @@ struct RouteStartPointScreen: View {
     @State private var scale: Double
     @State private var region: MKCoordinateRegion
     @State private var cameraPosition: MapCameraPosition
-    @State private var selectedViewModelIndex: Int = 0
 
     init(
         locationManager: MyLocationManager, navigationManager: NavigationManager
@@ -81,7 +80,6 @@ struct RouteStartPointScreen: View {
                                         .frame(width: 380, height: 50)
                                     Button(action: {
                                         showInfoSheet = true
-                                        selectedViewModelIndex = viewModel.selectedIndex
                                     }) {
                                         Image(systemName: "info.circle")
                                             .padding()
