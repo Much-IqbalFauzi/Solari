@@ -11,7 +11,7 @@ import SwiftData
 struct HomeScreen: View {
     
     @StateObject private var locationManager = MyLocationManager()
-    @EnvironmentObject var NavigationManager: NavigationManager
+    @EnvironmentObject var navigationManager: NavigationManager
     @State private var refreshID = UUID()
     @Query var runSessions: [RunSession]
     
@@ -54,7 +54,7 @@ struct HomeScreen: View {
                 }
                 
                 RunButton(buttonText: "Select Routes", action: {
-                    NavigationManager.navigate(to: .startPoint)
+                    navigationManager.navigate(to: .startPoint)
                 })
                 .padding(.top, 5)
                 .padding(.bottom, 55)
