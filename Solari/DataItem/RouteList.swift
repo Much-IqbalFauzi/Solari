@@ -102,6 +102,7 @@ var routes: [solariRoute] = [
             .r33,
             .r34,
             .r35,
+            .rtpr1,
             .r36,
             .r37,
             .r38,
