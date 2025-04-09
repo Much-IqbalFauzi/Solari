@@ -16,6 +16,7 @@ class SelectRouteViewModel: ObservableObject {
     @Published var listRoute: [solariRoute]
     @Published var selectedIndex = 0
     @Published var selectedRouteId: UUID?
+    @Published var selectedStartPoint: UUID?
     @Published var mapRegion: MKCoordinateRegion
     @Published var isNearAlertShown: Bool = false
     @Published var isStartPointSelected: Bool = false
@@ -32,10 +33,13 @@ class SelectRouteViewModel: ObservableObject {
 
     func navigateRunProgressHandler() {
        let selectedRouteId = self.listRoute[selectedIndex].id
-        navigationManager.navigate(to: .startProgress(routeId: selectedRouteId, startPointId: selectedRouteId))
+        guard let selectedStartPointId = self.selectedStartPoint else {
+            return
+        }
+        navigationManager.navigate(to: .startProgress(routeId: selectedRouteId, startPointId: selectedStartPointId))
     }
     
     func resetRouteStartPoint() {
-        self.selectedRouteId = nil
+        self.selectedStartPoint = nil
     }
 }

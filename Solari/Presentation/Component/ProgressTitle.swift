@@ -10,18 +10,20 @@ import SwiftUI
 struct ProgressTitle: View {
     var title: String = ""
     var body: some View {
-        VStack {
-            Text("Run Progress on")
-                .font(.title3)
-                .fontWeight(.semibold)
-            Text(title)
-                .font(.title)
+        HStack {
+            Text("Route Progress")
+                .font(.title2)
                 .fontWeight(.bold)
-                .padding(.top, -5)
+                .padding()
+            Spacer()
+            Text(title)
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding()
         }
         
     }
 }
 #Preview {
-    ProgressTitle(title: "ilsa")
+    ProgressTitle(title: "Long Run")
 }
