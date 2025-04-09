@@ -78,11 +78,13 @@ class RunProgressViewModel: MyLocationManager {
         if self.visitedPoints.isEmpty {
             let distanceToNextPoint: Double = self.distanceToNextPoint(currentLocation: latestLocation)
             print("THE DISTANCE while visitedPoints empty IS \(distanceToNextPoint), \(self.visitedPoints.count), \(self.runningRoutePoints.count)")
-            if (distanceToNextPoint < 8) {
+            if (distanceToNextPoint < 20) {
                 let latestMarker = self.runningRoutePoints.removeLast()
                 self.visitedPoints.append(latestMarker)
+                print("LATEST MARKER IS \(latestMarker)")
                 
                 let latesMarkerIdx = self.preparedMarkers.firstIndex(where: {$0.id == latestMarker.id})!
+                print("LATEST MARKER IDX IS \(latesMarkerIdx)")
                 
                 if let nextPittMarker = self.preparedMarkers[(latesMarkerIdx + 1)...].first(where: {
                     $0.showMarker == true
@@ -99,7 +101,7 @@ class RunProgressViewModel: MyLocationManager {
         
         let distanceToNextPoint: Double = self.distanceToNextPoint(currentLocation: latestLocation)
         print("Visited not empty && THE DISTANCE IS \(distanceToNextPoint), \(self.visitedPoints.count), \(self.runningRoutePoints.count)")
-        if distanceToNextPoint < 8 {
+        if distanceToNextPoint < 20 {
             let latestMarker: sMarker = self.runningRoutePoints.removeLast()
             self.visitedPoints.append(latestMarker)
             
@@ -124,7 +126,8 @@ class RunProgressViewModel: MyLocationManager {
         let latestMarker: sMarker = self.runningRoutePoints.last!
         
         guard let latesMarkerIdx = self.preparedMarkers.firstIndex(where: {$0.id == latestMarker.id}) else {
-            return 9.0
+            print("TRY TO GET THE LATEST MARKER IDX")
+            return 90.0
         }
         
         if let nextPittMarker = self.preparedMarkers[(latesMarkerIdx + 1)...].first(where: {
@@ -132,12 +135,14 @@ class RunProgressViewModel: MyLocationManager {
         }) {
             
             let listPoint = self.preparedMarkers[(latesMarkerIdx + 1)...]
+            print("THE LIST POINT: \(listPoint)")
             
             let distance = calcDistance(from: currentLocation, to: nextPittMarker.coordinate)
             
             return distance
         } else {
-            return 9.0
+            print("LATEST MARKER IS NOT SHOW")
+            return 90.0
         }
         
     }

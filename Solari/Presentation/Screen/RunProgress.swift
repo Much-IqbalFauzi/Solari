@@ -81,7 +81,7 @@ struct RunProgressScreen: View {
                 .padding(.vertical, 6)
                 .frame(width: 380, height: 420)
 
-                RunMetricCard(title: "Your next destination:", value: viewModel.runningRoutePoints.last?.name ?? "Unknown")
+//                RunMetricCard(title: "Your next destination:", value: viewModel.runningRoutePoints.last?.name ?? "Unknown")
 //                Spacer()
                 RunMetricsRow(
                     duration: runDataManager.formattedElapsedTime,
