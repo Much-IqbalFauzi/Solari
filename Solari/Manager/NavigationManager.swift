@@ -34,5 +34,5 @@ enum RouteNav: Hashable {
     case home
     case startPoint
     case startProgress(routeId: UUID, startPointId: UUID)
-    case summary
+    case summary(routeId: UUID)
 }

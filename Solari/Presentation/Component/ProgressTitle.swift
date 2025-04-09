@@ -15,12 +15,13 @@ struct ProgressTitle: View {
                 .font(.title2)
                 .fontWeight(.bold)
                 .padding()
-            Spacer()
+//            Spacer()
+            Divider()
             Text(title)
                 .font(.title2)
                 .fontWeight(.bold)
                 .padding()
-        }
+        }.padding(.top, 20)
         
     }
 }

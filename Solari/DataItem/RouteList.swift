@@ -167,6 +167,26 @@ var routes: [solariRoute] = [
         ], description: "", imageNames: ["LONG1", "LONG2", "LONG3", "LONG4", "LONG5", "LONG6"],
         looping: 5
     ),
+    
+    solariRoute(
+        id: UUID(), name: "GOP", obstacles: [],
+        startPoints: [
+            .p14,
+            .p8,
+            .p10,
+            .p13,
+        ],
+        markers: [
+            .p14,
+            .p8,
+            .p9,
+            .p10,
+            .p11,
+            .p12,
+            .p13
+        ], description: "", imageNames: [],
+        looping: 5
+    ),
 ]
 
 enum markerName: String {
