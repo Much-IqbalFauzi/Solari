@@ -10,9 +10,10 @@ import SwiftUI
 struct InfoModalView: View {
     
     @State var titleText: String
-    var infoText: String
+    var obstacles: [String]
     
     let images: [String]
+//    var description: String
     
     @State private var currentIndex = 0
        private let timerInterval: TimeInterval = 2.5
@@ -42,8 +43,13 @@ struct InfoModalView: View {
                 Text(titleText)
                     .font(.title2)
                     .bold()
+//                Text(description)
+//                Text(infoText)
                 
-                Text(infoText)
+                ForEach(Array(obstacles.enumerated()), id: \.offset) { idx, item in
+                    Text(item)
+                    
+                }
                 
                 Spacer(minLength: 40) 
             }

@@ -42,6 +42,7 @@ struct ContentView: View {
                         SummaryScreen(routeId: routeId, runDataManager: runDataManager)
                             .navigationBarBackButtonHidden(true)
                             .interactiveDismissDisabled(true)
+                            .toolbarBackground(.hidden, for: .navigationBar)
                     }
                 }
         }

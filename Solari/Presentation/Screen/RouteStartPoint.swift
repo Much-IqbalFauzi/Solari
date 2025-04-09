@@ -16,7 +16,7 @@ struct RouteStartPointScreen: View {
     @State private var scale: Double
     @State private var region: MKCoordinateRegion
     @State private var cameraPosition: MapCameraPosition
-    
+
     init(
         locationManager: MyLocationManager, navigationManager: NavigationManager
     ) {
@@ -26,30 +26,32 @@ struct RouteStartPointScreen: View {
                 locationManager: locationManager,
                 navigationManager: navigationManager
             ))
-        
+
         let initialScale: Double = 340
         let initialRegion = MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: -6.30147, longitude: 106.65196),
-                latitudinalMeters: initialScale,
-                longitudinalMeters: initialScale
-            )
-            _scale = State(initialValue: initialScale)
-            _region = State(initialValue: initialRegion)
-            _cameraPosition = State(initialValue: .region(initialRegion))
+            center: CLLocationCoordinate2D(
+                latitude: -6.30147, longitude: 106.65196),
+            latitudinalMeters: initialScale,
+            longitudinalMeters: initialScale
+        )
+        _scale = State(initialValue: initialScale)
+        _region = State(initialValue: initialRegion)
+        _cameraPosition = State(initialValue: .region(initialRegion))
 
     }
-    
+
     func zoom(factor: Double) {
         scale *= factor
         cameraPosition = .region(
             MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: -6.30147, longitude: 106.65196),
+                center: CLLocationCoordinate2D(
+                    latitude: -6.30147, longitude: 106.65196),
                 latitudinalMeters: scale,
                 longitudinalMeters: scale
             )
         )
     }
-    
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 10) {
@@ -69,12 +71,10 @@ struct RouteStartPointScreen: View {
                             id: \.offset
                         ) { index, route in
                             VStack {
-                                HStack (
-                      
-                                    
-                                    
+                                HStack(
+
                                     spacing: -80
-                                ){
+                                ) {
                                     Text(route.name)
                                         .font(.system(size: 30))
                                         .fontWeight(.semibold)
@@ -89,9 +89,14 @@ struct RouteStartPointScreen: View {
                                     }
                                     Spacer()
                                         .sheet(isPresented: $showInfoSheet) {
-                                            InfoModalView(titleText: route.name, infoText: route.description,images:route.imageNames)
-                                                .presentationDetents([.medium])
-                                                .presentationDragIndicator(.visible)
+                                            InfoModalView(
+                                                titleText: route.name,
+//                                                description: route.description,
+                                                obstacles: route.obstacles,
+                                                images: route.imageNames
+                                            )
+                                            .presentationDetents([.medium])
+                                            .presentationDragIndicator(.visible)
                                         }
                                 }
                                 ZStack(alignment: .bottomTrailing) {
@@ -101,9 +106,10 @@ struct RouteStartPointScreen: View {
                                         selection: $viewModel.selectedRouteId
                                     ) {
                                         MapPolyline(
-                                            coordinates: route.markers.compactMap {
-                                                $0.coordinate
-                                            }
+                                            coordinates: route.markers
+                                                .compactMap {
+                                                    $0.coordinate
+                                                }
                                         )
                                         .stroke(.blue, lineWidth: 8.0)
                                         ForEach(
@@ -111,7 +117,7 @@ struct RouteStartPointScreen: View {
                                                 route.markers.enumerated()),
                                             id: \.offset
                                         ) { idx, marker in
-                                            
+
                                             if marker.showMarker {
                                                 Marker(
                                                     marker.name,
@@ -122,34 +128,45 @@ struct RouteStartPointScreen: View {
                                                 ).tint(
                                                     viewModel
                                                         .selectedStartPoint
-                                                    == marker.id
-                                                    ? Color.greenYellow : .blue)
+                                                        == marker.id
+                                                        ? Color.greenYellow
+                                                        : .blue)
                                             }
                                         }
                                     }.cornerRadius(15)
                                         .shadow(radius: 4)
                                         .padding(.horizontal, 8)
                                         .padding(.vertical, 6)
-                                    
+
                                     VStack(spacing: 13) {
                                         Button {
                                             zoom(factor: 0.8)
                                         } label: {
-                                            Image(systemName: "plus.magnifyingglass")
-                                                .frame(width: 10, height: 10)
-                                                .padding()
-                                                .background(Color.white.opacity(0.8))
-                                                .clipShape(Circle())
+                                            Image(
+                                                systemName:
+                                                    "plus.magnifyingglass"
+                                            )
+                                            .frame(width: 10, height: 10)
+                                            .padding()
+                                            .background(
+                                                Color.white.opacity(0.8)
+                                            )
+                                            .clipShape(Circle())
                                         }
-                                        
+
                                         Button {
                                             zoom(factor: 1.25)
                                         } label: {
-                                            Image(systemName: "minus.magnifyingglass")
-                                                .frame(width: 10, height: 10)
-                                                .padding()
-                                                .background(Color.white.opacity(0.8))
-                                                .clipShape(Circle())
+                                            Image(
+                                                systemName:
+                                                    "minus.magnifyingglass"
+                                            )
+                                            .frame(width: 10, height: 10)
+                                            .padding()
+                                            .background(
+                                                Color.white.opacity(0.8)
+                                            )
+                                            .clipShape(Circle())
                                         }
                                     }
                                     .padding([.bottom, .trailing], 18)

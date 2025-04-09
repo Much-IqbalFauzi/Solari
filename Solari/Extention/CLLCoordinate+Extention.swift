@@ -58,6 +58,7 @@ extension CLLocationCoordinate2D {
     static let p39: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.30153, longitude: 106.65225)
     static let p40: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.30155, longitude: 106.65232)
     static let p41: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.30211, longitude: 106.65289)
+   
     
     static let p49: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.30209, longitude: 106.65285)
     static let p50: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.30194, longitude: 106.65256) //buat rute dalem yang pednek
