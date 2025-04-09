@@ -16,6 +16,7 @@ struct RouteStartPointScreen: View {
     @State private var scale: Double
     @State private var region: MKCoordinateRegion
     @State private var cameraPosition: MapCameraPosition
+    @State private var selectedViewModelIndex: Int = 0
 
     init(
         locationManager: MyLocationManager, navigationManager: NavigationManager
@@ -37,7 +38,6 @@ struct RouteStartPointScreen: View {
         _scale = State(initialValue: initialScale)
         _region = State(initialValue: initialRegion)
         _cameraPosition = State(initialValue: .region(initialRegion))
-
     }
 
     func zoom(factor: Double) {
@@ -81,6 +81,8 @@ struct RouteStartPointScreen: View {
                                         .frame(width: 380, height: 50)
                                     Button(action: {
                                         showInfoSheet = true
+//                                        viewModel.selectedIndex = index
+                                        selectedViewModelIndex = index
                                     }) {
                                         Image(systemName: "info.circle")
                                             .padding()
@@ -88,16 +90,16 @@ struct RouteStartPointScreen: View {
                                             .clipShape(Circle())
                                     }
                                     Spacer()
-                                        .sheet(isPresented: $showInfoSheet) {
-                                            InfoModalView(
-                                                titleText: route.name,
-//                                                description: route.description,
-                                                obstacles: route.obstacles,
-                                                images: route.imageNames
-                                            )
-                                            .presentationDetents([.medium])
-                                            .presentationDragIndicator(.visible)
-                                        }
+//                                        .sheet(isPresented: $showInfoSheet) {
+//                                            InfoModalView(
+//                                                titleText: route.name,
+////                                                description: route.description,
+//                                                obstacles: route.obstacles,
+//                                                images: route.imageNames
+//                                            )
+//                                            .presentationDetents([.medium])
+//                                            .presentationDragIndicator(.visible)
+//                                        }
                                 }
                                 ZStack(alignment: .bottomTrailing) {
                                     Map(
@@ -245,6 +247,16 @@ struct RouteStartPointScreen: View {
                                 }
                             })
                     }
+                }
+                .sheet(isPresented: $showInfoSheet) {
+                    InfoModalView(
+                        titleText: viewModel.listRoute[selectedViewModelIndex].name,
+//                                                description: route.description,
+                        obstacles: viewModel.listRoute[selectedViewModelIndex].obstacles,
+                        images: viewModel.listRoute[selectedViewModelIndex].imageNames
+                    )
+                    .presentationDetents([.medium])
+                    .presentationDragIndicator(.visible)
                 }
             }
 

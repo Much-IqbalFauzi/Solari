@@ -61,6 +61,7 @@ extension sMarker {
     static let r33 = sMarker(name: "B", coordinate: CLLocationCoordinate2D(latitude: -6.30203, longitude: 106.65111))
     static let r34 = sMarker(name: "r34", coordinate: CLLocationCoordinate2D(latitude: -6.30195, longitude: 106.65085), showMarker: false)
     static let r35 = sMarker(name: "r35", coordinate: CLLocationCoordinate2D(latitude: -6.30112, longitude: 106.65056), showMarker: false)
+    static let rtpr1 = sMarker(name: "rtpr1", coordinate: CLLocationCoordinate2D(latitude: -6.30036, longitude: 106.65088), showMarker: false)
     static let r36 = sMarker(name: "C", coordinate: CLLocationCoordinate2D(latitude: -6.30024, longitude: 106.65125))
     static let r37 = sMarker(name: "r37", coordinate: CLLocationCoordinate2D(latitude: -6.30081, longitude: 106.65139), showMarker: false)
     static let r38 = sMarker(name: "r38", coordinate: CLLocationCoordinate2D(latitude: -6.30124, longitude: 106.65197), showMarker: false)
