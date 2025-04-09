@@ -92,7 +92,7 @@ struct RouteStartPointScreen: View {
                                 }
                                 ZStack(alignment: .bottomTrailing) {
                                     Map(
-                                        //position: $cameraPosition,
+                                        position: $cameraPosition,
                                         interactionModes: [.zoom],
                                         selection: $viewModel.selectedRouteId
                                     ) {
