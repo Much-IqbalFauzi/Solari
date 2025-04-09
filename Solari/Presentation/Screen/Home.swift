@@ -12,6 +12,7 @@ struct HomeScreen: View {
     
     @StateObject private var locationManager = MyLocationManager()
     @EnvironmentObject var NavigationManager: NavigationManager
+    @State private var refreshID = UUID()
     @Query var runSessions: [RunSession]
     
     var viewModel: HomeViewModel {
@@ -59,7 +60,12 @@ struct HomeScreen: View {
                 .padding(.bottom, 55)
             }
         }
+        .id(refreshID)
+        .onAppear {
+            refreshID = UUID()
+        }
     }
+
 }
 
 #Preview {

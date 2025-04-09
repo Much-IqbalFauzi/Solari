@@ -23,8 +23,6 @@ struct SummaryScreen: View {
                     .fill(Color.lightGray)
                     .frame(width: 370, height: 380)
                 
-                Text(String("\(runSessions.count) Run Sessions"))
-                
                 LazyVGrid(columns: columns) {
                     RunResultCard(
                         runResultType: "Distance",
