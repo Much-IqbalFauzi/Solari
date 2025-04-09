@@ -6,11 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HomeScreen: View {
     
     @StateObject private var locationManager = MyLocationManager()
     @EnvironmentObject var NavigationManager: NavigationManager
+    @Query var runSessions: [RunSession]
+    
+    var viewModel: HomeViewModel {
+        HomeViewModel(sessions: runSessions)
+    }
     
     var body: some View {
         VStack{
@@ -40,8 +46,8 @@ struct HomeScreen: View {
                 
                 
                 HStack {
-                    ForEach(CardSummary.summaries, id: \.summaryType) {
-                        summary in summary
+                    ForEach(viewModel.summaries, id: \.summaryType) { summary in
+                        summary
                             .padding(.top, -50)
                     }
                 }
