@@ -81,8 +81,7 @@ struct RouteStartPointScreen: View {
                                         .frame(width: 380, height: 50)
                                     Button(action: {
                                         showInfoSheet = true
-//                                        viewModel.selectedIndex = index
-                                        selectedViewModelIndex = index
+                                        selectedViewModelIndex = viewModel.selectedIndex
                                     }) {
                                         Image(systemName: "info.circle")
                                             .padding()
@@ -90,16 +89,6 @@ struct RouteStartPointScreen: View {
                                             .clipShape(Circle())
                                     }
                                     Spacer()
-//                                        .sheet(isPresented: $showInfoSheet) {
-//                                            InfoModalView(
-//                                                titleText: route.name,
-////                                                description: route.description,
-//                                                obstacles: route.obstacles,
-//                                                images: route.imageNames
-//                                            )
-//                                            .presentationDetents([.medium])
-//                                            .presentationDragIndicator(.visible)
-//                                        }
                                 }
                                 ZStack(alignment: .bottomTrailing) {
                                     Map(
@@ -249,11 +238,12 @@ struct RouteStartPointScreen: View {
                     }
                 }
                 .sheet(isPresented: $showInfoSheet) {
+                    let route = viewModel.listRoute[viewModel.selectedIndex]
                     InfoModalView(
-                        titleText: viewModel.listRoute[selectedViewModelIndex].name,
-//                                                description: route.description,
-                        obstacles: viewModel.listRoute[selectedViewModelIndex].obstacles,
-                        images: viewModel.listRoute[selectedViewModelIndex].imageNames
+                        titleText: route.name,
+                        description: route.description,
+                        obstacles: route.obstacles,
+                        images: route.imageNames
                     )
                     .presentationDetents([.medium])
                     .presentationDragIndicator(.visible)
