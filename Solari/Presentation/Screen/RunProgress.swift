@@ -17,6 +17,7 @@ struct RunProgressScreen: View {
     @ObservedObject var runDataManager: RunDataManager
     @State private var showingStopAlert = false
     @StateObject private var viewModel: RunProgressViewModel
+    @State private var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
 
     init(routeId: UUID, startPointId: UUID, runDataManager: RunDataManager) {
         self.startPointId = startPointId
@@ -39,6 +40,7 @@ struct RunProgressScreen: View {
                 ProgressTitle(title: viewModel.route.name)
 
                 Map(
+                    position: $cameraPosition,
                     interactionModes: [.zoom]
                 ) {
                     MapPolyline(
@@ -46,7 +48,15 @@ struct RunProgressScreen: View {
                             $0.coordinate
                         }
                     )
-                    .stroke(.blue, lineWidth: 8.0)
+                    .stroke(.blue .opacity(0.3), lineWidth: 8.0)
+                    
+                    MapPolyline(
+                        coordinates: runDataManager.locationHistory.map {
+                            $0.coordinate
+                        }
+                    )
+                    .stroke(Color.greenYellow, lineWidth: 5.0)
+                    
                     UserAnnotation()
                         .stroke(Color.red, lineWidth: 8.0)
                         .mapOverlayLevel(level: MKOverlayLevel.aboveRoads)
