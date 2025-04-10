@@ -19,6 +19,7 @@ class RunDataManager: ObservableObject {
     private var lastLocation: CLLocation?
     private var timer: Timer?
     private var startTime: Date?
+    private(set) var locationHistory: [CLLocation] = []
 
     /// Injected from outside to allow SwiftData save
     var onSave: ((RunSession) -> Void)?
@@ -79,6 +80,10 @@ class RunDataManager: ObservableObject {
         lastLocation = nil
         isPaused = false
     }
+    
+    func resetLocationHistory() {
+        locationHistory = []
+    }
 
     private func saveRunSession() {
         let run = RunSession(
@@ -106,7 +111,8 @@ class RunDataManager: ObservableObject {
             distanceTraveled += distance
             currentPace = distanceTraveled > 0 ? elapsedTime / (distanceTraveled / 1000) : 0
         }
-
+        
+        locationHistory.append(location)
         lastLocation = location
     }
     
@@ -156,6 +162,10 @@ extension RunDataManager {
         let minutes = Int(paceInSecondsPerKm) / 60
         let seconds = Int(paceInSecondsPerKm) % 60
         return String(format: "%d:%02d", minutes, seconds)
+    }
+    
+    var locationCoordinates: [CLLocation] {
+        locationHistory
     }
     
 }

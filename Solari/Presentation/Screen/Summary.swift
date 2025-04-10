@@ -42,7 +42,15 @@ struct SummaryScreen: View {
                             $0.coordinate
                         }
                     )
-                    .stroke(.blue, lineWidth: 8.0)
+                    .stroke(.blue .opacity(0.3), lineWidth: 8.0)
+                    
+                    MapPolyline(
+                        coordinates: runDataManager.locationHistory.map {
+                            $0.coordinate
+                        }
+                    )
+                    .stroke(Color.greenYellow, lineWidth: 5.0)
+                    
                     UserAnnotation()
                         .stroke(Color.red, lineWidth: 8.0)
                         .mapOverlayLevel(level: MKOverlayLevel.aboveRoads)
@@ -98,6 +106,7 @@ struct SummaryScreen: View {
         
         RunButton(buttonText: "Back to Home", trailingIcon: "", action: {
             navigationManager.reset()
+            runDataManager.resetLocationHistory()
         })
         .padding(.top, 5)
         .padding(.bottom, 55)
