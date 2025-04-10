@@ -41,4 +41,5 @@ extension Color {
 
 extension Color {
     static let crimson = Color(hex: "#DC143C")
+    static let greenYellow = Color(hex: "#D5FF5F")
 }

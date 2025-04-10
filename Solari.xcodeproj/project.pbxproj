@@ -10,9 +10,34 @@
 		5964692B2D92344A004B3A34 /* Solari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Solari.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		59646AFE2D9AB80F004B3A34 /* Exceptions for "Solari" folder in "Solari" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Extention/View+Extention.swift",
+				Info.plist,
+			);
+			target = 5964692A2D92344A004B3A34 /* Solari */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		59646AFF2D9AB80F004B3A34 /* Exceptions for "Solari" folder in "Copy Bundle Resources" phase from "Solari" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 596469292D92344A004B3A34 /* Resources */;
+			membershipExceptions = (
+				"Extention/View+Extention.swift",
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5964694C2D923485004B3A34 /* Solari */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				59646AFE2D9AB80F004B3A34 /* Exceptions for "Solari" folder in "Solari" target */,
+				59646AFF2D9AB80F004B3A34 /* Exceptions for "Solari" folder in "Copy Bundle Resources" phase from "Solari" target */,
+			);
 			path = Solari;
 			sourceTree = "<group>";
 		};
@@ -94,6 +119,9 @@
 			);
 			mainGroup = 596469222D92344A004B3A34;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				702339372D9E74600098B54B /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5964692C2D92344A004B3A34 /* Products */;
 			projectDirPath = "";
@@ -249,11 +277,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Solari/Preview Content\"";
+				DEVELOPMENT_TEAM = 6WW489BN9Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location always";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location when in use";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -264,8 +296,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fadels.Solari;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ailsa.Solari;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -280,8 +313,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Solari/Preview Content\"";
+				DEVELOPMENT_TEAM = 6WW489BN9Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location always";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location when in use";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -292,7 +328,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fadels.Solari;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ailsa.Solari;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -322,6 +358,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		702339372D9E74600098B54B /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 596469232D92344A004B3A34 /* Project object */;
 }

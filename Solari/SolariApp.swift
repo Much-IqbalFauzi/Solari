@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct SolariApp: App {
@@ -13,5 +14,6 @@ struct SolariApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: RunSession.self)
     }
 }
