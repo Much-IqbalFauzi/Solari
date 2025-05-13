@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var navigation = Navigation()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $navigation.path) {
+            SplashScreen()
+                .navigationDestination(for: Route.self) { route in
+                    switch route {
+                    case .selectRoute:
+                        SelectRoute()
+                            .navigationBarBackButtonHidden(true)
+                            .navigationBarTitle("Select Route")
+                    case .runProgress:
+                        RunProgress()
+                    case .summary:
+                        Text("Summary")
+                    }
+                }
         }
-        .padding()
+        .environmentObject(navigation)
+        .preferredColorScheme(.light)
     }
 }
 
