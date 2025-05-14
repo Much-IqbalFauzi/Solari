@@ -18,8 +18,11 @@ struct ContentView: View {
                         SelectRoute()
                             .navigationBarBackButtonHidden(true)
                             .navigationBarTitle("Select Route")
-                    case .runProgress:
-                        RunProgress()
+                    case .runProgress(let solariRoute):
+                        RunProgress(solariRoute: solariRoute)
+                            .navigationBarHidden(true)
+                            .navigationBarBackButtonHidden(true)
+                            .interactiveDismissDisabled(true)
                     case .summary:
                         Text("Summary")
                     }

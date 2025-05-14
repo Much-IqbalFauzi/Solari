@@ -10,6 +10,7 @@ import Combine
 import Foundation
 
 class SelectRouteViewModel: ObservableObject {
+    
     @Published var selectedRoute: Route?
     
     @Published var routes: [Route] = []

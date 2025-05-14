@@ -27,6 +27,6 @@ class Navigation: ObservableObject {
 
 enum Route: Hashable {
     case selectRoute
-    case runProgress
+    case runProgress(solariRoute: SolariRoute)
     case summary
 }

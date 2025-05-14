@@ -30,3 +30,13 @@ struct SolariRoute {
         self.looping = looping
     }
 }
+
+extension SolariRoute: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    public static func == (lhs: SolariRoute, rhs: SolariRoute) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

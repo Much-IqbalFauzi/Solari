@@ -11,6 +11,7 @@ struct Btn: View {
     var text: String
     var trailingIcon: String = "figure.run"
     var btnColor: Color = .volcanicSand
+    var foregroundColor: Color = .whiteCrest
     var action: () -> Void = {}
     
     var body: some View {
@@ -19,7 +20,7 @@ struct Btn: View {
                 Label(text, systemImage: trailingIcon)
                     .font(.system(size: 24))
                     .fontWeight(.semibold)
-                    .foregroundStyle(Color.whiteCrest)
+                    .foregroundStyle(foregroundColor)
                 .padding()
                 .frame(maxWidth: 300, maxHeight: 65)
                 .foregroundColor(.black)

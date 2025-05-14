@@ -13,10 +13,12 @@ struct SelectRoute: View {
 
     private var listRoute: [SolariRoute] = routes
 
-    private var vm: SelectRouteViewModel
+    
+    @EnvironmentObject private var navigation: Navigation
+    @StateObject var vm: SelectRouteViewModel
 
     init() {
-        self.vm = SelectRouteViewModel()
+        _vm = StateObject(wrappedValue: SelectRouteViewModel())
     }
 
     var body: some View {
@@ -52,6 +54,7 @@ struct SelectRoute: View {
                                                 .coordinate
                                         ).tint(Color.fuhciaFever)
                                     }
+                                    
                                 }
                             }
                             .frame(height: 300)
@@ -67,7 +70,7 @@ struct SelectRoute: View {
                             Btn(
                                 text: "Run",
                                 action: {
-                                    print("Presse Run")
+                                    navigation.navigate(to: .runProgress(solariRoute: route))
                                 })
                         }.scrollTransition { effect, phase in
                             effect
