@@ -43,8 +43,6 @@ struct ContentView: View {
                             .navigationBarBackButtonHidden(true)
                             .interactiveDismissDisabled(true)
                             .toolbarBackground(.hidden, for: .navigationBar)
-                    case .camera(routeId: let routeId):
-                        CameraCaptureView(routeId: routeId)
                     }
                 }
         }

@@ -36,5 +36,4 @@ enum RouteNav: Hashable {
     case startPoint
     case startProgress(routeId: UUID, startPointId: UUID)
     case summary(routeId: UUID)
-    case camera(routeId: UUID)
 }

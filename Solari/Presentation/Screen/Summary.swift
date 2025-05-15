@@ -20,8 +20,10 @@ struct SummaryScreen: View {
     var isDummy: Bool = false
     @State private var showCamera = false
     @State private var takenImage: UIImage?
-    @State private var navigateToCamera = false
-    
+    //    @State private var navigateToCamera = false
+    @State private var showingCamera: Bool = false
+    @State private var selectedImage: UIImage?
+    @State private var showingEditor: Bool = false
     
     init(routeId: UUID, runDataManager: RunDataManager) {
         self.routeId = routeId
@@ -35,7 +37,9 @@ struct SummaryScreen: View {
     var body: some View {
         VStack {
             ZStack{
-                Map {
+                Map(
+                    interactionModes: []
+                ) {
                     MapPolyline(
                         coordinates: viewModel.route.markers.compactMap {
                             $0.coordinate
@@ -76,67 +80,84 @@ struct SummaryScreen: View {
                     
                     Spacer()
                     
-                    VStack(alignment: .center, spacing: 0) {
-                        RunResultCard(
-                            runResultType: "Time",
-                            runResultValue: runDataManager.formatDuration(
-                                runSessions.last?.distance ?? 0)
+                    VStack {
+                        VStack(alignment: .center, spacing: 0) {
+                            RunResultCard(
+                                runResultType: "Time",
+                                runResultValue: runDataManager.formatDuration(
+                                    runSessions.last?.distance ?? 0)
+                                
+                            )
                             
-                        )
-                        
-                        Rectangle().fill(Color.gray.opacity(0.3)).frame(width: 300, height: 1)
-                            .padding(.top, -15)
+                            Rectangle().fill(Color.gray.opacity(0.3)).frame(width: 300, height: 1)
+                                .padding(.top, -15)
+                            
+                            HStack {
+                                RunResultCard(
+                                    runResultType: "Distance",
+                                    runResultValue: runDataManager.formatDistanceInKM(
+                                        runSessions.last?.duration ?? 0),
+                                    runResultMetric: "km"
+                                )
+                                
+                                Rectangle()
+                                    .fill(Color.gray.opacity(0.3))
+                                    .frame(width: 1, height: 130)
+                                    .padding(.horizontal, 15)
+                                
+                                RunResultCard(
+                                    runResultType: "Pace",
+                                    runResultValue: runDataManager.formatPaceString(
+                                        distance: runSessions.last?.distance ?? 0,
+                                        time: runSessions.last?.duration ?? 0
+                                    ),
+                                    runResultMetric: "min/km"
+                                )
+                            }
+                        }
                         
                         HStack {
-                            RunResultCard(
-                                runResultType: "Distance",
-                                runResultValue: runDataManager.formatDistanceInKM(
-                                    runSessions.last?.duration ?? 0),
-                                runResultMetric: "km"
-                            )
+                            // Home
+                            Button(action: {
+                                // Reset run data and navigate to home screen
+                                navigationManager.reset()
+                                runDataManager.resetLocationHistory()
+                            }) {
+                                Label("", systemImage: "arrow.turn.down.left")
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                    .frame(minWidth: 60, minHeight: 60)
+                                    .foregroundColor(.primary)
+                                    .background(Color.clear)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 18)
+                                            .stroke(.black, lineWidth: 2)
+                                    )
+                            }
                             
-                            Rectangle()
-                                .fill(Color.gray.opacity(0.3))
-                                .frame(width: 1, height: 130)
-                                .padding(.horizontal, 15)
+                            // Navigate to CameraCaptureView
+                            RunButton(buttonText: "Share Your Run", trailingIcon: "", action: {
+                                //                                navigationManager.navigate(to: .camera(routeId: routeId))
+                                showingCamera = true
+                            })
+                            .fullScreenCover(
+                                isPresented: $showingCamera,
+                                onDismiss: {
+                                    if selectedImage != nil {
+                                        showingEditor = true
+                                    }
+                                }
+                            ){
+                                CameraView(image: $selectedImage)
+                            }
+                            .fullScreenCover(isPresented: $showingEditor){
+                                if let image = selectedImage{
+                                    EditorView(image: image)
+                                }
+                            }
                             
-                            RunResultCard(
-                                runResultType: "Pace",
-                                runResultValue: runDataManager.formatPaceString(
-                                    distance: runSessions.last?.distance ?? 0,
-                                    time: runSessions.last?.duration ?? 0
-                                ),
-                                runResultMetric: "min/km"
-                            )
                         }
                     }
-                    
-                    HStack {
-                        // Home
-                        Button(action: {
-                            // Reset run data and navigate to home screen
-                            navigationManager.reset()
-                            runDataManager.resetLocationHistory()
-                        }) {
-                            Label("", systemImage: "arrow.turn.down.left")
-                                .font(.headline)
-                                .fontWeight(.bold)
-                                .frame(minWidth: 60, minHeight: 60)
-                                .foregroundColor(.primary)
-                                .background(Color.clear)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 18)
-                                        .stroke(.black, lineWidth: 2)
-                                )
-                        }
-                        
-                        // Navigate to CameraCaptureView
-                        RunButton(buttonText: "Share Your Run", trailingIcon: "", action: {
-                            navigationManager.navigate(to: .camera(routeId: routeId))
-                        })
-                        
-                    }
-                    .padding(.horizontal)
                 }
             }
             //end Zstack

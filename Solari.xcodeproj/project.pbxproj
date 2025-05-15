@@ -503,7 +503,7 @@
 				DEVELOPMENT_TEAM = 6PN64DQKLX;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.destu.SolariWatchOS-Watch-AppUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.destu.SolariNewWatchOS-Watch-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -522,7 +522,7 @@
 				DEVELOPMENT_TEAM = 6PN64DQKLX;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.destu.SolariWatchOS-Watch-AppUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.destu.SolariNewWatchOS-Watch-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -665,6 +665,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Solari/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access, allow it!";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location always";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location when in use";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -698,6 +699,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Solari/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access, allow it!";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location always";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location when in use";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
