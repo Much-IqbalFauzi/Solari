@@ -10,32 +10,30 @@ import SwiftUI
 struct RunResultCard: View {
     let runResultType: String
     @State var runResultValue: String
+    var runResultMetric: String = ""
     
     var body: some View {
             ZStack {
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(Color("summaryColor"))
-                    .frame(maxWidth: 140, maxHeight: 140)
-                    .shadow(radius: 2, x: 0, y: 2)
-                
                 // Running Summary Text
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     Text(runResultType)
                         .font(.system(size: 16))
                         .foregroundColor(.secondary)
                     
-                    Spacer()
-                    
                     Text(runResultValue)
-                        .font(.system(size: 40, weight: .bold))
-                        .minimumScaleFactor(0.5)
+                        .font(Font.custom("LeagueGothic-Regular", size: 75))
+                    
+                    Text(runResultMetric)
+                        .font(.system(size: 16))
+                        .foregroundColor(.secondary)
+                    
                 }
-                .padding(10)
-                .frame(maxWidth: 140, maxHeight: 140, alignment: .leading)
             }
     }
 }
 
 #Preview {
-    RunResultCard(runResultType: "Minutes", runResultValue: "30")
+    RunResultCard(
+        runResultType: "Distance", runResultValue: "7.2", runResultMetric: "km"
+    )
 }

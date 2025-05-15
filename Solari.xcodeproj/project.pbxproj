@@ -6,11 +6,65 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		43B041FA2DCF280400F8D1E0 /* SolariWatchOS Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 43B041D72DCF280300F8D1E0 /* SolariWatchOS Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		43B041E72DCF280400F8D1E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 596469232D92344A004B3A34 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43B041D62DCF280300F8D1E0;
+			remoteInfo = "SolariWatchOS Watch App";
+		};
+		43B041F12DCF280400F8D1E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 596469232D92344A004B3A34 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43B041D62DCF280300F8D1E0;
+			remoteInfo = "SolariWatchOS Watch App";
+		};
+		43B041F82DCF280400F8D1E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 596469232D92344A004B3A34 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43B041D62DCF280300F8D1E0;
+			remoteInfo = "SolariWatchOS Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		43B041FB2DCF280400F8D1E0 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				43B041FA2DCF280400F8D1E0 /* SolariWatchOS Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		43B041D72DCF280300F8D1E0 /* SolariWatchOS Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SolariWatchOS Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43B041E62DCF280400F8D1E0 /* SolariWatchOS Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SolariWatchOS Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43B041F02DCF280400F8D1E0 /* SolariWatchOS Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SolariWatchOS Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5964692B2D92344A004B3A34 /* Solari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Solari.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		43B042892DCF2C1700F8D1E0 /* Exceptions for "Solari" folder in "SolariWatchOS Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				"Extention/Color+Extention.swift",
+				Presentation/Component/RunButton.swift,
+			);
+			target = 43B041D62DCF280300F8D1E0 /* SolariWatchOS Watch App */;
+		};
 		59646AFE2D9AB80F004B3A34 /* Exceptions for "Solari" folder in "Solari" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -32,11 +86,27 @@
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		43B041D82DCF280300F8D1E0 /* SolariWatchOS Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SolariWatchOS Watch App";
+			sourceTree = "<group>";
+		};
+		43B041E92DCF280400F8D1E0 /* SolariWatchOS Watch AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SolariWatchOS Watch AppTests";
+			sourceTree = "<group>";
+		};
+		43B041F32DCF280400F8D1E0 /* SolariWatchOS Watch AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SolariWatchOS Watch AppUITests";
+			sourceTree = "<group>";
+		};
 		5964694C2D923485004B3A34 /* Solari */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				59646AFE2D9AB80F004B3A34 /* Exceptions for "Solari" folder in "Solari" target */,
 				59646AFF2D9AB80F004B3A34 /* Exceptions for "Solari" folder in "Copy Bundle Resources" phase from "Solari" target */,
+				43B042892DCF2C1700F8D1E0 /* Exceptions for "Solari" folder in "SolariWatchOS Watch App" target */,
 			);
 			path = Solari;
 			sourceTree = "<group>";
@@ -44,6 +114,27 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		43B041D42DCF280300F8D1E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43B041E32DCF280400F8D1E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43B041ED2DCF280400F8D1E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		596469282D92344A004B3A34 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -58,6 +149,9 @@
 			isa = PBXGroup;
 			children = (
 				5964694C2D923485004B3A34 /* Solari */,
+				43B041D82DCF280300F8D1E0 /* SolariWatchOS Watch App */,
+				43B041E92DCF280400F8D1E0 /* SolariWatchOS Watch AppTests */,
+				43B041F32DCF280400F8D1E0 /* SolariWatchOS Watch AppUITests */,
 				5964692C2D92344A004B3A34 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +160,9 @@
 			isa = PBXGroup;
 			children = (
 				5964692B2D92344A004B3A34 /* Solari.app */,
+				43B041D72DCF280300F8D1E0 /* SolariWatchOS Watch App.app */,
+				43B041E62DCF280400F8D1E0 /* SolariWatchOS Watch AppTests.xctest */,
+				43B041F02DCF280400F8D1E0 /* SolariWatchOS Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +170,74 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		43B041D62DCF280300F8D1E0 /* SolariWatchOS Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43B042022DCF280400F8D1E0 /* Build configuration list for PBXNativeTarget "SolariWatchOS Watch App" */;
+			buildPhases = (
+				43B041D32DCF280300F8D1E0 /* Sources */,
+				43B041D42DCF280300F8D1E0 /* Frameworks */,
+				43B041D52DCF280300F8D1E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				43B041D82DCF280300F8D1E0 /* SolariWatchOS Watch App */,
+			);
+			name = "SolariWatchOS Watch App";
+			packageProductDependencies = (
+			);
+			productName = "SolariWatchOS Watch App";
+			productReference = 43B041D72DCF280300F8D1E0 /* SolariWatchOS Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		43B041E52DCF280400F8D1E0 /* SolariWatchOS Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43B042032DCF280400F8D1E0 /* Build configuration list for PBXNativeTarget "SolariWatchOS Watch AppTests" */;
+			buildPhases = (
+				43B041E22DCF280400F8D1E0 /* Sources */,
+				43B041E32DCF280400F8D1E0 /* Frameworks */,
+				43B041E42DCF280400F8D1E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				43B041E82DCF280400F8D1E0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				43B041E92DCF280400F8D1E0 /* SolariWatchOS Watch AppTests */,
+			);
+			name = "SolariWatchOS Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "SolariWatchOS Watch AppTests";
+			productReference = 43B041E62DCF280400F8D1E0 /* SolariWatchOS Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		43B041EF2DCF280400F8D1E0 /* SolariWatchOS Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43B042042DCF280400F8D1E0 /* Build configuration list for PBXNativeTarget "SolariWatchOS Watch AppUITests" */;
+			buildPhases = (
+				43B041EC2DCF280400F8D1E0 /* Sources */,
+				43B041ED2DCF280400F8D1E0 /* Frameworks */,
+				43B041EE2DCF280400F8D1E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				43B041F22DCF280400F8D1E0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				43B041F32DCF280400F8D1E0 /* SolariWatchOS Watch AppUITests */,
+			);
+			name = "SolariWatchOS Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "SolariWatchOS Watch AppUITests";
+			productReference = 43B041F02DCF280400F8D1E0 /* SolariWatchOS Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		5964692A2D92344A004B3A34 /* Solari */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 596469392D92344B004B3A34 /* Build configuration list for PBXNativeTarget "Solari" */;
@@ -80,10 +245,12 @@
 				596469272D92344A004B3A34 /* Sources */,
 				596469282D92344A004B3A34 /* Frameworks */,
 				596469292D92344A004B3A34 /* Resources */,
+				43B041FB2DCF280400F8D1E0 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				43B041F92DCF280400F8D1E0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				5964694C2D923485004B3A34 /* Solari */,
@@ -105,6 +272,17 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					43B041D62DCF280300F8D1E0 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					43B041E52DCF280400F8D1E0 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 43B041D62DCF280300F8D1E0;
+					};
+					43B041EF2DCF280400F8D1E0 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 43B041D62DCF280300F8D1E0;
+					};
 					5964692A2D92344A004B3A34 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -128,11 +306,35 @@
 			projectRoot = "";
 			targets = (
 				5964692A2D92344A004B3A34 /* Solari */,
+				43B041D62DCF280300F8D1E0 /* SolariWatchOS Watch App */,
+				43B041E52DCF280400F8D1E0 /* SolariWatchOS Watch AppTests */,
+				43B041EF2DCF280400F8D1E0 /* SolariWatchOS Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		43B041D52DCF280300F8D1E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43B041E42DCF280400F8D1E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43B041EE2DCF280400F8D1E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		596469292D92344A004B3A34 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -143,6 +345,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		43B041D32DCF280300F8D1E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43B041E22DCF280400F8D1E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43B041EC2DCF280400F8D1E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		596469272D92344A004B3A34 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -152,7 +375,164 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		43B041E82DCF280400F8D1E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43B041D62DCF280300F8D1E0 /* SolariWatchOS Watch App */;
+			targetProxy = 43B041E72DCF280400F8D1E0 /* PBXContainerItemProxy */;
+		};
+		43B041F22DCF280400F8D1E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43B041D62DCF280300F8D1E0 /* SolariWatchOS Watch App */;
+			targetProxy = 43B041F12DCF280400F8D1E0 /* PBXContainerItemProxy */;
+		};
+		43B041F92DCF280400F8D1E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43B041D62DCF280300F8D1E0 /* SolariWatchOS Watch App */;
+			targetProxy = 43B041F82DCF280400F8D1E0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		43B041FC2DCF280400F8D1E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SolariWatchOS Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 6PN64DQKLX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SolariWatchOS;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.destu.SolariNew;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.destu.SolariNew.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		43B041FD2DCF280400F8D1E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SolariWatchOS Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 6PN64DQKLX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SolariWatchOS;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.destu.SolariNew;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.destu.SolariNew.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		43B041FE2DCF280400F8D1E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PN64DQKLX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.destu.SolariNewWatchOS-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SolariWatchOS Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SolariWatchOS Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		43B041FF2DCF280400F8D1E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PN64DQKLX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.destu.SolariNewWatchOS-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SolariWatchOS Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SolariWatchOS Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		43B042002DCF280400F8D1E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PN64DQKLX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.destu.SolariWatchOS-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "SolariWatchOS Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		43B042012DCF280400F8D1E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6PN64DQKLX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.destu.SolariWatchOS-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "SolariWatchOS Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
 		596469372D92344B004B3A34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -281,9 +661,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Solari/Preview Content\"";
-				DEVELOPMENT_TEAM = 6WW489BN9Y;
+				DEVELOPMENT_TEAM = 6PN64DQKLX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Solari/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location always";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location when in use";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -296,7 +677,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ailsa.Solari;
+				PRODUCT_BUNDLE_IDENTIFIER = com.destu.SolariNew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -313,9 +694,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Solari/Preview Content\"";
-				DEVELOPMENT_TEAM = 6WW489BN9Y;
+				DEVELOPMENT_TEAM = 6PN64DQKLX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Solari/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location always";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location when in use";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -328,7 +710,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ailsa.Solari;
+				PRODUCT_BUNDLE_IDENTIFIER = com.destu.SolariNew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -339,6 +721,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		43B042022DCF280400F8D1E0 /* Build configuration list for PBXNativeTarget "SolariWatchOS Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43B041FC2DCF280400F8D1E0 /* Debug */,
+				43B041FD2DCF280400F8D1E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43B042032DCF280400F8D1E0 /* Build configuration list for PBXNativeTarget "SolariWatchOS Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43B041FE2DCF280400F8D1E0 /* Debug */,
+				43B041FF2DCF280400F8D1E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43B042042DCF280400F8D1E0 /* Build configuration list for PBXNativeTarget "SolariWatchOS Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43B042002DCF280400F8D1E0 /* Debug */,
+				43B042012DCF280400F8D1E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		596469262D92344A004B3A34 /* Build configuration list for PBXProject "Solari" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

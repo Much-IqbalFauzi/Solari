@@ -9,6 +9,7 @@ import SwiftUI
 
 class NavigationManager: ObservableObject {
     @Published var path = NavigationPath()
+    @Published var capturedImage: UIImage? = nil
     var finishedRunDataManager: RunDataManager? = nil
     
     func navigate(to route: RouteNav, with runDataManager: RunDataManager? = nil) {
@@ -35,4 +36,5 @@ enum RouteNav: Hashable {
     case startPoint
     case startProgress(routeId: UUID, startPointId: UUID)
     case summary(routeId: UUID)
+    case camera(routeId: UUID)
 }

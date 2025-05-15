@@ -19,29 +19,44 @@ struct RunButton: View {
                 Label(buttonText, systemImage: trailingIcon)
                     .font(.system(size: 24))
                     .fontWeight(.semibold)
-                .padding()
-                .frame(maxWidth: 320, maxHeight: 65)
-                .foregroundColor(.black)
-                .background(btnColor)
-                .cornerRadius(15)
-                .background(
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .fill(
-                            .shadow(
-                                .inner(
-                                    color: .lightGray.opacity(0.5),
-
-                                    radius: 0.5,
-                                    x: -1,
-                                    y: 1
+                    .padding()
+                    .frame(maxWidth: 240, maxHeight: 65)
+                    .foregroundColor(.black)
+                    .background(btnColor)
+                    .cornerRadius(15)
+                    .overlay(
+                        // ✅ Gradient border
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(
+                                LinearGradient(
+                                    colors: [
+                                        .gradientYellow,
+                                        .gradientYellowBright
+                                    ],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: 1
+                            )
+                    )
+                    .background(
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .fill(
+                                .shadow(
+                                    .inner(
+                                        color: .lightGray.opacity(0.5),
+                                        
+                                        radius: 0.5,
+                                        x: -1,
+                                        y: 1
+                                    )
                                 )
                             )
-                        )
-                        .foregroundStyle(btnColor)
-                )
-
+                            .foregroundStyle(btnColor)
+                    )
+                
             }
-            .shadow(color: .gray.opacity(0.5), radius: 3, y: 2)
+            .shadow(color: .gray.opacity(0.2), radius: 3, y: 2)
         }
         
     }
