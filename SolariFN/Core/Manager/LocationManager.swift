@@ -5,6 +5,7 @@
 //  Created by Muchamad Iqbal Fauzi on 04/05/25.
 //
 
+import Combine
 import CoreLocation
 import Foundation
 
@@ -15,9 +16,20 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject,
     private let manager = CLLocationManager()
     @Published private(set) var authorizationStatus: CLAuthorizationStatus =
         .notDetermined
+
+    @Published var enteredRegionIdentifier: String?
+
+    let regionEntrySubject = PassthroughSubject<String, Never>()
+
     var authorizationStatusPublisher: Published<CLAuthorizationStatus>.Publisher
     {
         $authorizationStatus
+    }
+    var enteredRegionPublisher: Published<String?>.Publisher {
+        $enteredRegionIdentifier
+    }
+    var regionEntryPublisher: AnyPublisher<String, Never> {
+        regionEntrySubject.eraseToAnyPublisher()
     }
 
     override init() {
@@ -29,7 +41,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject,
 
     func requestAuthorization() {
         if manager.authorizationStatus == .notDetermined {
-            manager.requestWhenInUseAuthorization()
+//            manager.requestWhenInUseAuthorization()
+            manager.requestAlwaysAuthorization()
         } else {
             self.authorizationStatus = manager.authorizationStatus
         }
@@ -44,12 +57,29 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject,
         }
     }
 
-    func registerMultipleRegions(_ locations: [CLLocationCoordinate2D]) {
-        for location in locations {
-            let region = CLCircularRegion(
-                center: location, radius: 100, identifier: UUID().uuidString)
-            region.notifyOnEntry = true
-            manager.startMonitoring(for: region)
+//    func registerMultipleRegions(_ markers: [SMarker]) {
+//        print("Register multiple regions")
+//        for marker in markers {
+//            let region = CLCircularRegion(
+//                center: marker.coordinate, radius: 5, identifier: marker.name)
+//            region.notifyOnEntry = true
+//            manager.startMonitoring(for: region)
+//
+//            if let currentLocation = manager.location,
+//                region.contains(currentLocation.coordinate)
+//            {
+//                regionEntrySubject.send(region.identifier)
+//            }
+//        }
+//    }
+
+    func locationManager(
+        _ manager: CLLocationManager, didEnterRegion region: CLRegion
+    ) {
+        if let circular = region as? CLCircularRegion {
+            print("ENTEYED REGION: \(circular.identifier)")
+            regionEntrySubject.send(circular.identifier)
         }
     }
+
 }

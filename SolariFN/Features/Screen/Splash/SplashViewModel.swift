@@ -60,11 +60,17 @@ class SplashViewModel: ObservableObject {
 
     private func startInitialization() {
         logStep("Registering geofences...")
+        print("Registering geofences...")
         let testLocations = [
-            CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
-            CLLocationCoordinate2D(latitude: 34.0522, longitude: -118.2437),
+            SMarker.r5, SMarker.r9,
+            SMarker.r12, SMarker.r13,
+            SMarker.r15, SMarker.r22,
+            SMarker.r23, SMarker.r33,
+            SMarker.r36, SMarker.d1,
+            SMarker.d2
         ]
-        locationRepo.registerMultipleRegions(testLocations)
+
+//        locationRepo.registerMultipleRegions(testLocations)
 
         logStep("Starting motion tracking...")
         motionRepo.startTracking()

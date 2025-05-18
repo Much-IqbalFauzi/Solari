@@ -12,7 +12,6 @@ import SwiftUI
 struct SelectRoute: View {
 
     private var listRoute: [SolariRoute] = routes
-
     
     @EnvironmentObject private var navigation: Navigation
     @StateObject var vm: SelectRouteViewModel
@@ -34,12 +33,15 @@ struct SelectRoute: View {
                             Map(
                                 interactionModes: [.zoom]
                             ) {
+                                // TODO: Polyline
                                 MapPolyline(
                                     coordinates: route.markers.compactMap {
                                         $0.coordinate
                                     }
                                 )
-                                .stroke(Color.fuhciaFever, lineWidth: 8.0)
+                                .stroke(Color.fuhciaFever.opacity(0.7), lineWidth: 6.0)
+                                
+                                // TODO: Marker
                                 ForEach(
                                     Array(
                                         route.markers.enumerated()),
@@ -63,10 +65,12 @@ struct SelectRoute: View {
                                 .padding(.top, 15)
                                 .foregroundStyle(Color.volcanicSand)
                             Text(route.description)
-                                .font(.caption)
+                                .font(.subheadline)
+                                .fontWeight(.medium)
                                 .foregroundStyle(Color.volcanicSand)
-                                .multilineTextAlignment(.leading)
-                                .frame(height: 100)
+                                .multilineTextAlignment(.center)
+                                .frame(height: 60)
+                                .padding(.horizontal, 8)
                             Btn(
                                 text: "Run",
                                 action: {

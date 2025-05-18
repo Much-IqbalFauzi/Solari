@@ -12,14 +12,15 @@ struct SplashScreen: View {
     @EnvironmentObject private var navigation: Navigation
 
     init() {
-        let locationManager = LocationManager()
-        let motionManager = MotionManager()
+        let deps = AppDependencies.shared
+//        let locationManager = LocationManager()
+//        let motionManager = MotionManager()
         //        let dataRepo = SwiftDataRepository()
 
         _viewModel = StateObject(
             wrappedValue: SplashViewModel(
-                locationRepository: locationManager,
-                motionRepository: motionManager
+                locationRepository: deps.locationManager,
+                motionRepository: deps.motionManager
                     //            dataRepository: dataRepo
             ))
     }

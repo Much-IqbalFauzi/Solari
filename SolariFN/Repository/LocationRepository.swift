@@ -6,10 +6,13 @@
 //
 
 import CoreLocation
+import Combine
+import Foundation
 
 protocol LocationRepository {
     var authorizationStatusPublisher: Published<CLAuthorizationStatus>.Publisher
     { get }
     func requestAuthorization()
-    func registerMultipleRegions(_ locations: [CLLocationCoordinate2D])
+//    func registerMultipleRegions(_ locations: [SMarker])
+    var regionEntryPublisher: AnyPublisher<String, Never> { get }
 }

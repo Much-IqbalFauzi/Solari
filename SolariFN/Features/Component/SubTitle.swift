@@ -16,5 +16,6 @@ struct SubTitle: View {
     
     var body: some View {
         Text(text)
+            .foregroundStyle(Color.volcanicSand)
     }
 }

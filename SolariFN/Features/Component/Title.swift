@@ -18,6 +18,7 @@ struct Title: View {
         Text(text)
             .font(.title)
             .fontWeight(.bold)
+            .foregroundStyle(Color.volcanicSand)
     }
 }
 
