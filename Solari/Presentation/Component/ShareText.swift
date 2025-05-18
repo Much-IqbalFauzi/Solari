@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ShareText: View {
     var distance: String
@@ -13,36 +14,42 @@ struct ShareText: View {
     var date: String
     var textColor: Color = Color.white
     var showBackground: Bool = false
+    var coordinates: [CLLocationCoordinate2D] = []
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("🏃‍♂️ Run Today")
-                .font(.title2)
-                .fontWeight(.semibold)
+        VStack(alignment: .center, spacing: 8) {
+            Image("Solari-Transparent-White")
+                .resizable()
+                .frame(width: 40, height: 40)
                 .foregroundColor(textColor)
             
-            HStack {
-                VStack(alignment: .leading) {
+            VStack(alignment: .center) {
+                VStack{
                     Text("Distance")
                         .font(.caption)
                         .foregroundColor(textColor)
                     Text(distance)
-                        .font(.title)
+                        .font(.custom("LeagueGothic-Regular", size: 50))
                         .fontWeight(.bold)
                         .foregroundColor(textColor)
                 }
                 
-                Spacer()
-                
-                VStack(alignment: .leading) {
+                VStack {
                     Text("Pace")
                         .font(.caption)
                         .foregroundColor(textColor)
                     Text(pace)
-                        .font(.title)
+                        .font(.custom("LeagueGothic-Regular", size: 50))
                         .fontWeight(.bold)
                         .foregroundColor(textColor)
                 }
+                
+                // Replace with polyline route
+                RouteShape(coordinates: coordinates)
+                    .stroke(textColor, lineWidth: 2)
+                    .frame(width: 120, height: 100)
+                    .padding(.top, 4)
+                
             }
             
             Text(date)

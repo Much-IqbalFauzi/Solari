@@ -38,8 +38,8 @@ struct CameraView: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             
             if let image = info[.originalImage] as? UIImage {
-                parent.image = image
-                
+                let cropped = cropTo9by16(image: image)
+                parent.image = cropped
             }
             parent.presentationMode.wrappedValue.dismiss()
         }
@@ -47,8 +47,19 @@ struct CameraView: UIViewControllerRepresentable {
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             parent.presentationMode.wrappedValue.dismiss()
         }
-    }
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        func cropTo9by16(image: UIImage) -> UIImage {
+            let originalSize = image.size
+            let targetWidth = originalSize.height * 9 / 16
+
+            let xOffset = (originalSize.width - targetWidth) / 2
+            let cropRect = CGRect(x: xOffset, y: 0, width: targetWidth, height: originalSize.height)
+
+            if let cgImage = image.cgImage?.cropping(to: cropRect) {
+                return UIImage(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
+            }
+
+            return image
+        }
     }
 }

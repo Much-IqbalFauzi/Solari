@@ -203,6 +203,8 @@ struct RouteStartPointScreen: View {
                         RunButton(
                             buttonText: "Run Now",
                             action: {
+                                locationManager.isNearLocation = true
+                                
                                 if !locationManager.isNearLocation {
                                     withAnimation {
                                         viewModel.isNearAlertShown.toggle()

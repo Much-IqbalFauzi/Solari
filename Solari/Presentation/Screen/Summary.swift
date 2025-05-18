@@ -152,7 +152,7 @@ struct SummaryScreen: View {
                             }
                             .fullScreenCover(isPresented: $showingEditor){
                                 if let image = selectedImage{
-                                    EditorView(image: image)
+                                    EditorView(image: image, runDataManager: runDataManager)
                                 }
                             }
                             
