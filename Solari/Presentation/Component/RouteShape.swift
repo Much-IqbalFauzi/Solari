@@ -26,7 +26,7 @@ struct RouteShape: Shape {
             return Path()
         }
         
-        // Scale function to fit the map into the rect
+        // Scale function to f,it the map into the rect
         let latDelta = maxLat - minLat
         let lonDelta = maxLon - minLon
         

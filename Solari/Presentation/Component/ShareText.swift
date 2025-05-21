@@ -15,33 +15,46 @@ struct ShareText: View {
     var textColor: Color = Color.white
     var showBackground: Bool = false
     var coordinates: [CLLocationCoordinate2D] = []
+    var iconName: String
+    
     
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
-            Image("Solari-Transparent-White")
+            Image(iconName)
                 .resizable()
-                .frame(width: 40, height: 40)
-                .foregroundColor(textColor)
+                .frame(width: 60, height: 60)
             
-            VStack(alignment: .center) {
+            VStack(alignment: .center, spacing: 0) {
                 VStack{
                     Text("Distance")
                         .font(.caption)
                         .foregroundColor(textColor)
+                    
                     Text(distance)
                         .font(.custom("LeagueGothic-Regular", size: 50))
                         .fontWeight(.bold)
                         .foregroundColor(textColor)
+                    
+                    Text("km")
+                        .font(.custom("LeagueGothic-Regular", size: 17))
+                        .foregroundColor(textColor)
+                        .padding(.bottom, 10)
                 }
+                .padding(.bottom, 10)
                 
                 VStack {
                     Text("Pace")
                         .font(.caption)
                         .foregroundColor(textColor)
-                    Text(pace)
-                        .font(.custom("LeagueGothic-Regular", size: 50))
-                        .fontWeight(.bold)
-                        .foregroundColor(textColor)
+                    
+                        Text(pace)
+                            .font(.custom("LeagueGothic-Regular", size: 50))
+                            .fontWeight(.bold)
+                            .foregroundColor(textColor)
+                        Text("min/km")
+                            .font(.custom("LeagueGothic-Regular", size: 17))
+                            .foregroundColor(textColor)
+                            .padding(.bottom, 10)
                 }
                 
                 // Replace with polyline route
@@ -57,10 +70,10 @@ struct ShareText: View {
                 .foregroundColor(textColor)
         }
         .padding(12)
-        .frame(maxWidth: 250, alignment: .leading)
+        .frame(maxWidth: 160, alignment: .center)
         .background(
             showBackground
-            ? Color.white.opacity(0.6)
+            ? Color.white.opacity(0.3)
             : Color.clear
         )
         .cornerRadius(showBackground ? 12 : 0)
@@ -68,5 +81,10 @@ struct ShareText: View {
 }
 
 #Preview {
-    ShareText(distance: "500 m", pace: "5:12 /km", date: "May 15, 2025")
+    ShareText(
+        distance: "500",
+        pace: "5:12",
+        date: "May 15, 2025",
+        iconName: "Solari-Transparent-White"
+    )
 }

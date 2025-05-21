@@ -24,6 +24,7 @@ struct SummaryScreen: View {
     @State private var showingCamera: Bool = false
     @State private var selectedImage: UIImage?
     @State private var showingEditor: Bool = false
+    @State private var useDummyData: Bool = false
     
     init(routeId: UUID, runDataManager: RunDataManager) {
         self.routeId = routeId
@@ -36,131 +37,143 @@ struct SummaryScreen: View {
     
     var body: some View {
         VStack {
-            ZStack{
-                Map(
-                    interactionModes: []
-                ) {
-                    MapPolyline(
-                        coordinates: viewModel.route.markers.compactMap {
-                            $0.coordinate
-                        }
-                    )
-                    .stroke(.blue .opacity(0.3), lineWidth: 8.0)
-                    
-                    MapPolyline(
-                        coordinates: runDataManager.locationHistory.map {
-                            $0.coordinate
-                        }
-                    )
-                    .stroke(Color.greenYellow, lineWidth: 5.0)
-                    
-                    UserAnnotation()
-                        .stroke(Color.red, lineWidth: 8.0)
-                        .mapOverlayLevel(level: MKOverlayLevel.aboveRoads)
-                        .tint(.red)
-                    
-                    ForEach(viewModel.route.markers.indices, id: \.self) {
-                        idx in
-                        let marker = viewModel.route.markers[idx]
-                        if marker.showMarker {
-                            Marker(
-                                marker.name,
-                                systemImage: "figure.run.circle.fill",
-                                coordinate: marker.coordinate
-                            )
-                            .tint(.blue)
-                        }
+            FinishTitle()
+            
+            Map(
+                interactionModes: []
+            ) {
+                MapPolyline(
+                    coordinates: viewModel.route.markers.compactMap {
+                        $0.coordinate
                     }
-                }
-                .mapStyle(.standard)
-                .shadow(radius: 4)
+                )
+                .stroke(.blue .opacity(0.3), lineWidth: 8.0)
                 
-                VStack {
-                    FinishTitle()
-                    
-                    Spacer()
-                    
-                    VStack {
-                        VStack(alignment: .center, spacing: 0) {
-                            RunResultCard(
-                                runResultType: "Time",
-                                runResultValue: runDataManager.formatDuration(
-                                    runSessions.last?.distance ?? 0)
-                                
-                            )
-                            
-                            Rectangle().fill(Color.gray.opacity(0.3)).frame(width: 300, height: 1)
-                                .padding(.top, -15)
-                            
-                            HStack {
-                                RunResultCard(
-                                    runResultType: "Distance",
-                                    runResultValue: runDataManager.formatDistanceInKM(
-                                        runSessions.last?.duration ?? 0),
-                                    runResultMetric: "km"
-                                )
-                                
-                                Rectangle()
-                                    .fill(Color.gray.opacity(0.3))
-                                    .frame(width: 1, height: 130)
-                                    .padding(.horizontal, 15)
-                                
-                                RunResultCard(
-                                    runResultType: "Pace",
-                                    runResultValue: runDataManager.formatPaceString(
-                                        distance: runSessions.last?.distance ?? 0,
-                                        time: runSessions.last?.duration ?? 0
-                                    ),
-                                    runResultMetric: "min/km"
-                                )
-                            }
-                        }
-                        
-                        HStack {
-                            // Home
-                            Button(action: {
-                                // Reset run data and navigate to home screen
-                                navigationManager.reset()
-                                runDataManager.resetLocationHistory()
-                            }) {
-                                Label("", systemImage: "arrow.turn.down.left")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                    .frame(minWidth: 60, minHeight: 60)
-                                    .foregroundColor(.primary)
-                                    .background(Color.clear)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 18)
-                                            .stroke(.black, lineWidth: 2)
-                                    )
-                            }
-                            
-                            // Navigate to CameraCaptureView
-                            RunButton(buttonText: "Share Your Run", trailingIcon: "", action: {
-                                //                                navigationManager.navigate(to: .camera(routeId: routeId))
-                                showingCamera = true
-                            })
-                            .fullScreenCover(
-                                isPresented: $showingCamera,
-                                onDismiss: {
-                                    if selectedImage != nil {
-                                        showingEditor = true
-                                    }
-                                }
-                            ){
-                                CameraView(image: $selectedImage)
-                            }
-                            .fullScreenCover(isPresented: $showingEditor){
-                                if let image = selectedImage{
-                                    EditorView(image: image, runDataManager: runDataManager)
-                                }
-                            }
-                            
-                        }
+                MapPolyline(
+                    coordinates: runDataManager.locationHistory.map {
+                        $0.coordinate
+                    }
+                )
+                .stroke(Color.greenYellow, lineWidth: 5.0)
+                
+                UserAnnotation()
+                    .stroke(Color.red, lineWidth: 8.0)
+                    .mapOverlayLevel(level: MKOverlayLevel.aboveRoads)
+                    .tint(.red)
+                
+                ForEach(viewModel.route.markers.indices, id: \.self) {
+                    idx in
+                    let marker = viewModel.route.markers[idx]
+                    if marker.showMarker {
+                        Marker(
+                            marker.name,
+                            systemImage: "figure.run.circle.fill",
+                            coordinate: marker.coordinate
+                        )
+                        .tint(.blue)
                     }
                 }
             }
-            //end Zstack
+            .mapStyle(.standard)
+            .shadow(radius: 4)
+            .frame(maxHeight: 500)
+            .cornerRadius(20)
+            .padding(.horizontal, 20)
+            
+            
+            VStack {
+                
+                Spacer()
+                
+                VStack {
+                    VStack(alignment: .center, spacing: 0) {
+//                        Toggle(isOn: $useDummyData) {
+//                            Label("Use Dummy Data", systemImage: "square.and.arrow.down.onsquare")
+//                                .font(.caption)
+//                                .foregroundColor(.secondary)
+//                                .help("When your SwiftData ghosted you but you still wanna flex that run")
+//                        }
+//                        .padding(.horizontal, 25)
+                        
+                        RunResultCard(
+                            runResultType: "Time",
+                            runResultValue: runDataManager.formatDuration(
+                                runSessions.last?.distance ?? 0)
+                            
+                        )
+                        
+                        Rectangle().fill(Color.gray.opacity(0.3)).frame(width: 300, height: 1)
+                            .padding(.top, -15)
+                        
+                        HStack {
+                            RunResultCard(
+                                runResultType: "Distance",
+                                runResultValue: runDataManager.formatDistanceInKM(
+                                    runSessions.last?.duration ?? 0),
+                                runResultMetric: "km"
+                            )
+                            
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(width: 1, height: 130)
+                                .padding(.horizontal, 15)
+                            
+                            RunResultCard(
+                                runResultType: "Pace",
+                                runResultValue: runDataManager.formatPaceString(
+                                    distance: runSessions.last?.distance ?? 0,
+                                    time: runSessions.last?.duration ?? 0
+                                ),
+                                runResultMetric: "min/km"
+                            )
+                        }
+                    }
+                    
+                    HStack {
+                        // Home
+                        Button(action: {
+                            // Reset run data and navigate to home screen
+                            navigationManager.reset()
+                            runDataManager.resetLocationHistory()
+                        }) {
+                            Label("", systemImage: "arrow.turn.down.left")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .frame(minWidth: 60, minHeight: 60)
+                                .foregroundColor(.primary)
+                                .background(Color.clear)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 18)
+                                        .stroke(.black, lineWidth: 2)
+                                )
+                        }
+                        
+                        // Navigate to CameraCaptureView
+                        RunButton(buttonText: "Share Your Run", trailingIcon: "", action: {
+                            //                                navigationManager.navigate(to: .camera(routeId: routeId))
+                            showingCamera = true
+                        })
+                        .fullScreenCover(
+                            isPresented: $showingCamera,
+                            onDismiss: {
+                                if selectedImage != nil {
+                                    showingEditor = true
+                                }
+                            }
+                        ){
+                            CameraView(
+                                capturedImage: $selectedImage
+                            )
+                        }
+                        .fullScreenCover(isPresented: $showingEditor){
+                            if let image = selectedImage{
+                                EditorView(image: image, runDataManager: runDataManager)
+                            }
+                        }
+                        
+                    }
+                }
+            }
         }
     }
 }

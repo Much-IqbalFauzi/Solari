@@ -7,9 +7,12 @@
 
 import SwiftUI
 import PhotosUI
+import SwiftData
 
 struct EditorView: View {
-    var image: UIImage
+    @Query(sort: \RunSession.date, order: .reverse)
+    private var runSessions: [RunSession]
+    let image: UIImage
     @State private var textColor: Color = .white
     let predefinedText = "Run Today"
     
@@ -28,7 +31,33 @@ struct EditorView: View {
     
     var runDataManager: RunDataManager
     
+    // Change icon image
+    @State private var iconOptions: [UIImage] = []
+    @State private var selectedIconIndex: Int = 0
+    
+    // Array of image names corresponding to each color
+    let iconImageNames = ["Solari-Transparent-White", "Solari-Transparent-Black", "Solari-Transparent-GreenYellow"]
+
+    // Mapping from Color to index in the iconImageNames array
+    let colorToIconIndex: [Color: Int] = [
+        .white: 0,
+        .black: 1,
+        Color(hex: "#D5FF5F"): 2
+    ]
+    
+    //date
+    let currentDate = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .none)
+    
+    
     var body: some View {
+        let latestSession = runSessions.first
+        let distanceValue = latestSession?.distance ?? 500.0
+        let durationValue = latestSession?.duration ?? 312.0
+
+        let formattedDistance = runDataManager.formatDistanceInKM(distanceValue)
+        let formattedPace = runDataManager.formatPaceString(distance: distanceValue, time: durationValue)
+
+        
         ZStack {
             GeometryReader { geo in
                 let width = geo.size.width
@@ -44,11 +73,12 @@ struct EditorView: View {
                         
                         
                         ShareText(
-                            distance: "500 m",
-                            pace: "5:12 /km",
-                            date: "May 15, 2025",
+                            distance: formattedDistance,
+                            pace: formattedPace,
+                            date: currentDate,
                             textColor: textColor, showBackground: showTextBackground, coordinates: runDataManager.locationHistory
-                                .map { $0.coordinate }
+                                .map { $0.coordinate },
+                            iconName: iconImageNames[selectedIconIndex]
                         )
                         .scaleEffect(scale)
                         .offset(textOffset)
@@ -91,7 +121,7 @@ struct EditorView: View {
                     Button(action: {
                         showTextBackground.toggle()
                     }) {
-                        ZStack {
+                        ZStack(alignment: .center) {
                             if showTextBackground {
                                 Rectangle()
                                     .fill(Color.white.opacity(0.6))
@@ -109,11 +139,14 @@ struct EditorView: View {
                                 .foregroundStyle(.white)
                         }
                     }
-
-                    // Color picker buttons
-                    ForEach([Color.black, Color.white, Color(hex: "#9BE865")], id: \.self) { color in
+                    
+                    // Color picker buttons and iconImage color
+                    ForEach([Color.white, Color.black, Color(hex: "#D5FF5F")], id: \.self) { color in
                         Button(action: {
                             textColor = color
+                            if let index = colorToIconIndex[color] {
+                                selectedIconIndex = index
+                            }
                         }) {
                             Circle()
                                 .fill(color)
@@ -155,6 +188,7 @@ struct EditorView: View {
                 .padding()
             }
         }
+        .background(.black)
     }
     
     // Extracted Drag Gesture
@@ -185,6 +219,13 @@ struct EditorView: View {
     private func saveComposedImage() {
         let screenWidth = UIScreen.main.bounds.width
         let screenSize = CGSize(width: screenWidth, height: screenWidth * 16 / 9)
+        
+        let latestSession = runSessions.first
+        let distanceValue = latestSession?.distance ?? 500.0
+        let durationValue = latestSession?.duration ?? 312.0
+
+        let formattedDistance = runDataManager.formatDistanceInKM(distanceValue)
+        let formattedPace = runDataManager.formatPaceString(distance: distanceValue, time: durationValue)
 
         let composedView = ZStack {
             Image(uiImage: image)
@@ -194,11 +235,12 @@ struct EditorView: View {
                 .ignoresSafeArea()
             
             ShareText(
-                distance: "500 m",
-                pace: "5:12 /km",
-                date: "May 15, 2025",
+                distance: formattedDistance,
+                pace: formattedPace,
+                date: currentDate,
                 textColor: textColor, showBackground: showTextBackground, coordinates: runDataManager.locationHistory
-                    .map { $0.coordinate }
+                    .map { $0.coordinate },
+                iconName: iconImageNames[selectedIconIndex]
             )
             .scaleEffect(scale)
             .offset(textOffset)
@@ -207,6 +249,21 @@ struct EditorView: View {
         let imageResult = composedView.snapshot(size: screenSize)
 
         UIImageWriteToSavedPhotosAlbum(imageResult, nil, nil, nil)
+    }
+    
+    private func iconForColor(_ color: Color) -> UIImage {
+        guard !iconOptions.isEmpty else { return UIImage() }
+        
+        switch color {
+        case Color.black:
+            return iconOptions.indices.contains(1) ? iconOptions[1] : iconOptions[0]
+        case Color.white:
+            return iconOptions[0]
+        case Color(hex: "#9BE865"):
+            return iconOptions.indices.contains(2) ? iconOptions[2] : iconOptions[0]
+        default:
+            return iconOptions[0]
+        }
     }
 }
 
@@ -221,5 +278,12 @@ extension View {
             controller.view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         }
     }
+}
+
+#Preview {
+    EditorView(
+        image: UIImage(named: "image-dummy")!,
+        runDataManager: RunDataManager(locationManager: MyLocationManager())
+    )
 }
 
