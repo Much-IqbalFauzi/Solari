@@ -9,6 +9,7 @@ import SwiftUI
 
 class NavigationManager: ObservableObject {
     @Published var path = NavigationPath()
+    @Published var capturedImage: UIImage? = nil
     var finishedRunDataManager: RunDataManager? = nil
     
     func navigate(to route: RouteNav, with runDataManager: RunDataManager? = nil) {

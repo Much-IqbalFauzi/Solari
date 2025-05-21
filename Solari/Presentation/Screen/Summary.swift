@@ -15,10 +15,17 @@ struct SummaryScreen: View {
     var runDataManager: RunDataManager
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     @Query(sort: \RunSession.date, order: .forward) var runSessions:
-        [RunSession]
-
+    [RunSession]
     @StateObject private var viewModel: SummaryViewModel
-
+    var isDummy: Bool = false
+    @State private var showCamera = false
+    @State private var takenImage: UIImage?
+    //    @State private var navigateToCamera = false
+    @State private var showingCamera: Bool = false
+    @State private var selectedImage: UIImage?
+    @State private var showingEditor: Bool = false
+    @State private var useDummyData: Bool = false
+    
     init(routeId: UUID, runDataManager: RunDataManager) {
         self.routeId = routeId
         self.runDataManager = runDataManager
@@ -27,90 +34,147 @@ struct SummaryScreen: View {
                 routeId: routeId
             ))
     }
-
+    
     var body: some View {
-        VStack(spacing: 10) {
-            Spacer()
+        VStack {
             FinishTitle()
-
-            VStack {
-                Map(
-                    interactionModes: [.zoom]
-                ) {
-                    MapPolyline(
-                        coordinates: viewModel.route.markers.compactMap {
-                            $0.coordinate
-                        }
-                    )
-                    .stroke(.blue .opacity(0.3), lineWidth: 8.0)
-                    
-                    MapPolyline(
-                        coordinates: runDataManager.locationHistory.map {
-                            $0.coordinate
-                        }
-                    )
-                    .stroke(Color.greenYellow, lineWidth: 5.0)
-                    
-                    UserAnnotation()
-                        .stroke(Color.red, lineWidth: 8.0)
-                        .mapOverlayLevel(level: MKOverlayLevel.aboveRoads)
-                        .tint(.red)
-
-                    ForEach(viewModel.route.markers.indices, id: \.self) {
-                        idx in
-                        let marker = viewModel.route.markers[idx]
-                        if marker.showMarker {
-                            Marker(
-                                marker.name,
-                                systemImage: "figure.run.circle.fill",
-                                coordinate: marker.coordinate
-                            )
-                            .tint(.blue)
-                        }
+            
+            Map(
+                interactionModes: []
+            ) {
+                MapPolyline(
+                    coordinates: viewModel.route.markers.compactMap {
+                        $0.coordinate
+                    }
+                )
+                .stroke(.blue .opacity(0.3), lineWidth: 8.0)
+                
+                MapPolyline(
+                    coordinates: runDataManager.locationHistory.map {
+                        $0.coordinate
+                    }
+                )
+                .stroke(Color.greenYellow, lineWidth: 5.0)
+                
+                UserAnnotation()
+                    .stroke(Color.red, lineWidth: 8.0)
+                    .mapOverlayLevel(level: MKOverlayLevel.aboveRoads)
+                    .tint(.red)
+                
+                ForEach(viewModel.route.markers.indices, id: \.self) {
+                    idx in
+                    let marker = viewModel.route.markers[idx]
+                    if marker.showMarker {
+                        Marker(
+                            marker.name,
+                            systemImage: "figure.run.circle.fill",
+                            coordinate: marker.coordinate
+                        )
+                        .tint(.blue)
                     }
                 }
-                .cornerRadius(15)
-                .shadow(radius: 4)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 6)
-                .frame(width: 380, height: 360)
-
-                LazyVGrid(columns: columns) {
-                    RunResultCard(
-                        runResultType: "Distance",
-                        runResultValue: runDataManager.formatDistanceInKM(
-                            runSessions.last?.distance ?? 0)
-                    )
-
-                    RunResultCard(
-                        runResultType: "Duration",
-                        runResultValue: runDataManager.formatDuration(
-                            runSessions.last?.duration ?? 0)
-                    )
-
-                    RunResultCard(
-                        runResultType: "Pace",
-                        runResultValue: runDataManager.formatPaceString(
-                            distance: runSessions.last?.distance ?? 0,
-                            time: runSessions.last?.duration ?? 0
-                        )
-                    )
-                }
-                .padding(.horizontal)
             }
-
-            VStack(spacing: 10) {
-
+            .mapStyle(.standard)
+            .shadow(radius: 4)
+            .frame(maxHeight: 500)
+            .cornerRadius(20)
+            .padding(.horizontal, 20)
+            
+            
+            VStack {
+                
+                Spacer()
+                
+                VStack {
+                    VStack(alignment: .center, spacing: 0) {
+//                        Toggle(isOn: $useDummyData) {
+//                            Label("Use Dummy Data", systemImage: "square.and.arrow.down.onsquare")
+//                                .font(.caption)
+//                                .foregroundColor(.secondary)
+//                                .help("When your SwiftData ghosted you but you still wanna flex that run")
+//                        }
+//                        .padding(.horizontal, 25)
+                        
+                        RunResultCard(
+                            runResultType: "Time",
+                            runResultValue: runDataManager.formatDuration(
+                                runSessions.last?.distance ?? 0)
+                            
+                        )
+                        
+                        Rectangle().fill(Color.gray.opacity(0.3)).frame(width: 300, height: 1)
+                            .padding(.top, -15)
+                        
+                        HStack {
+                            RunResultCard(
+                                runResultType: "Distance",
+                                runResultValue: runDataManager.formatDistanceInKM(
+                                    runSessions.last?.duration ?? 0),
+                                runResultMetric: "km"
+                            )
+                            
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(width: 1, height: 130)
+                                .padding(.horizontal, 15)
+                            
+                            RunResultCard(
+                                runResultType: "Pace",
+                                runResultValue: runDataManager.formatPaceString(
+                                    distance: runSessions.last?.distance ?? 0,
+                                    time: runSessions.last?.duration ?? 0
+                                ),
+                                runResultMetric: "min/km"
+                            )
+                        }
+                    }
+                    
+                    HStack {
+                        // Home
+                        Button(action: {
+                            // Reset run data and navigate to home screen
+                            navigationManager.reset()
+                            runDataManager.resetLocationHistory()
+                        }) {
+                            Label("", systemImage: "arrow.turn.down.left")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .frame(minWidth: 60, minHeight: 60)
+                                .foregroundColor(.primary)
+                                .background(Color.clear)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 18)
+                                        .stroke(.black, lineWidth: 2)
+                                )
+                        }
+                        
+                        // Navigate to CameraCaptureView
+                        RunButton(buttonText: "Share Your Run", trailingIcon: "", action: {
+                            //                                navigationManager.navigate(to: .camera(routeId: routeId))
+                            showingCamera = true
+                        })
+                        .fullScreenCover(
+                            isPresented: $showingCamera,
+                            onDismiss: {
+                                if selectedImage != nil {
+                                    showingEditor = true
+                                }
+                            }
+                        ){
+                            CameraView(
+                                capturedImage: $selectedImage
+                            )
+                        }
+                        .fullScreenCover(isPresented: $showingEditor){
+                            if let image = selectedImage{
+                                EditorView(image: image, runDataManager: runDataManager)
+                            }
+                        }
+                        
+                    }
+                }
             }
         }
-        
-        RunButton(buttonText: "Back to Home", trailingIcon: "", action: {
-            navigationManager.reset()
-            runDataManager.resetLocationHistory()
-        })
-        .padding(.top, 5)
-        .padding(.bottom, 55)
-
     }
 }
 
